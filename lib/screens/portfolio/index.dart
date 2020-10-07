@@ -5,9 +5,9 @@ import 'package:iamjagni/screens/portfolio/store.dart';
 import 'package:iamjagni/screens/portfolio/widgets/card.dart';
 import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/layout.dart';
-import 'package:iamjagni/widgets/blank_slate_screen.dart';
-import 'package:iamjagni/widgets/error_screen.dart';
-import 'package:iamjagni/widgets/loading_screen.dart';
+import 'package:iamjagni/widgets/status_screens/blank_slate.dart';
+import 'package:iamjagni/widgets/status_screens/error.dart';
+import 'package:iamjagni/widgets/status_screens/loading.dart';
 import 'package:provider/provider.dart';
 
 class PortfolioScreen extends StatefulWidget {

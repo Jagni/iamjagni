@@ -15,12 +15,13 @@ import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioDetails extends StatelessWidget {
   static const routeName = "PortfolioDetails";
+  final Project project;
+  const PortfolioDetails({Key key, this.project}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     final itemSize = min(AppLayout.maxContentWidth(context),
-        AppLayout.maxContentHeight(context) * 0.75);
+        AppLayout.maxContentHeight(context));
     return Consumer<MainStore>(builder: (context, store, widget) {
-      final project = store.portfolio.selectedProject;
       return Scaffold(
           backgroundColor: cardColor,
           appBar: AppBar(
@@ -32,30 +33,30 @@ class PortfolioDetails extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SafeArea(
-                  child: Padding(
-                    padding: EdgeInsets.all(AppLayout.paddingSize),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                            Row(
-                              children: [
-                                SizedBox(width: 44, child: buildImage(project)),
-                                SizedBox(width: 4),
-                                Expanded(child: buildTitle(project, context)),
-                              ],
-                            ),
-                            SizedBox(height: 8),
-                            if (project.screenshots.length > 0)
-                              buildScreenshotSlider(project, itemSize, context),
-                            if (project.screenshots.length > 0)
-                              SizedBox(height: 32),
-                            Text(project.description ?? "Sem descrição"),
-                            SizedBox(height: 8)
-                          ] +
-                          buildURLlist(project) +
-                          [buildTechnologyChips(project)],
-                    ),
+                Padding(
+                  padding: EdgeInsets.all(AppLayout.paddingSize),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                          Row(
+                            children: [
+                              SizedBox(width: 44, child: buildImage(project)),
+                              SizedBox(width: 4),
+                              Expanded(child: buildTitle(project, context)),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          if (project.screenshots.length > 0)
+                            SizedBox(height: 16),
+                          if (project.screenshots.length > 0)
+                            buildScreenshotSlider(project, itemSize, context),
+                          if (project.screenshots.length > 0)
+                            SizedBox(height: 24),
+                          Text(project.description ?? "Sem descrição"),
+                          SizedBox(height: 8)
+                        ] +
+                        buildURLlist(project) +
+                        [buildTechnologyChips(project)],
                   ),
                 )
               ],
@@ -88,20 +89,45 @@ class PortfolioDetails extends StatelessWidget {
 
   buildScreenshotSlider(
       Project project, double itemSize, BuildContext context) {
-    return Container(
-      child: Swiper(
-        onTap: (index) {
-          Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return PortfolioDetailsPhotos(initialIndex: index);
-          }));
-        },
-        itemBuilder: (BuildContext context, int index) {
-          return CachedImageWrapper(url: project.screenshots[index]);
-        },
+    return SizedBox(
+      height: itemSize,
+      child: GridView.builder(
+        scrollDirection: Axis.horizontal,
         itemCount: project.screenshots.length,
-        itemWidth: itemSize,
-        itemHeight: itemSize,
-        layout: SwiperLayout.TINDER,
+        clipBehavior: Clip.none,
+        addAutomaticKeepAlives: false,
+        addRepaintBoundaries: false,
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 1,
+            childAspectRatio: 1,
+            mainAxisSpacing: AppLayout.paddingSize),
+        itemBuilder: (BuildContext context, int index) {
+          return Hero(
+              tag: project.uid + index.toString(),
+              child: Card(
+                  color: backgroundColor,
+                  clipBehavior: Clip.antiAlias,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16)),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              fullscreenDialog: true,
+                              builder: (BuildContext context) {
+                                return PortfolioDetailsPhotos(
+                                  initialIndex: index,
+                                  project: project,
+                                );
+                              }));
+                    },
+                    child: CachedImageWrapper(
+                      url: project.screenshots[index],
+                      fit: BoxFit.contain,
+                    ),
+                  )));
+        },
       ),
     );
   }

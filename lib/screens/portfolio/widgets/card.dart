@@ -16,9 +16,8 @@ class PortfolioCard extends StatelessWidget {
     return Consumer<MainStore>(builder: (context, store, widget) {
       return DoubleCard(
         onTap: () {
-          store.portfolio.selectedProject = project;
           Navigator.push(context, CupertinoPageRoute(builder: (context) {
-            return PortfolioDetails();
+            return PortfolioDetails(project: project);
           }));
         },
         child: Column(
@@ -33,7 +32,6 @@ class PortfolioCard extends StatelessWidget {
         ),
       );
     });
-    // });
   }
 
   buildImage(Project project) {
