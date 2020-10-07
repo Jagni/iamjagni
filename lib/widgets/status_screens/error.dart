@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:iamjagni/utils/layout.dart';
+import 'package:iamjagni/widgets/image/status.dart';
 
 class ErrorScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
-            child: Image.asset(
-      "assets/images/loading.gif",
-      fit: BoxFit.contain,
-      width: AppLayout.maxContentWidth(context) / 5,
-    )));
+            child: SizedBox(
+                width: AppLayout.maxContentWidth(context) / 5,
+                child: ErrorImage())));
   }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:iamjagni/home.dart';
 import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/design.dart';
-import 'package:iamjagni/widgets/loading_screen.dart';
+import 'package:iamjagni/widgets/status_screens/loading.dart';
 import 'package:provider/provider.dart';
 
 void main() {

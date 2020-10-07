@@ -1,9 +1,9 @@
-import 'package:animations/animations.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/models/portfolio/project.dart';
 import 'package:iamjagni/screens/portfolio/details.dart';
 import 'package:iamjagni/store.dart';
-import 'package:iamjagni/utils/design.dart';
+import 'package:iamjagni/widgets/image/circle_image.dart';
 import 'package:iamjagni/widgets/double_card.dart';
 import 'package:provider/provider.dart';
 
@@ -14,42 +14,50 @@ class PortfolioCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<MainStore>(builder: (context, store, widget) {
-      return OpenContainer<bool>(
-          closedColor: backgroundColor,
-          openColor: cardColor,
-          closedElevation: 0,
-          transitionType: ContainerTransitionType.fade,
-          openBuilder: (BuildContext context, close) {
+      return DoubleCard(
+        onTap: () {
+          store.portfolio.selectedProject = project;
+          Navigator.push(context, CupertinoPageRoute(builder: (context) {
             return PortfolioDetails();
-          },
-          tappable: false,
-          closedBuilder: (context, open) {
-            return DoubleCard(
-              onTap: () {
-                store.portfolio.selectedProject = project;
-                open();
-              },
-              child: Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
-                  Expanded(
-                    child: Container(
-                      decoration: BoxDecoration(
-                          shape: BoxShape.circle, color: Colors.blueGrey),
-                      child: Image.asset("assets/images/avatar.png"),
-                    ),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    project.title,
-                    style: Theme.of(context).textTheme.headline5,
-                    textAlign: TextAlign.center,
-                    maxLines: 1,
-                  ),
-                ],
-              ),
-            );
-          });
+          }));
+        },
+        child: Column(
+          mainAxisSize: MainAxisSize.max,
+          children: [
+            Expanded(
+              child: buildImage(project),
+            ),
+            SizedBox(height: 8),
+            buildTitle(project, context),
+          ],
+        ),
+      );
     });
+    // });
+  }
+
+  buildImage(Project project) {
+    var url = project.iconUrl;
+    final asset = url == null;
+    if (asset) {
+      url = "assets/images/avatar.png";
+    }
+    return Hero(
+        transitionOnUserGestures: true,
+        tag: project.uid + "icon",
+        child: CircleImage(url: url, asset: asset));
+  }
+
+  buildTitle(Project project, BuildContext context) {
+    final child = Text(
+      project.title,
+      style: Theme.of(context).textTheme.headline5,
+      textAlign: TextAlign.center,
+      maxLines: 1,
+    );
+    return Hero(
+        transitionOnUserGestures: true,
+        tag: project.uid + "title",
+        child: child);
   }
 }
