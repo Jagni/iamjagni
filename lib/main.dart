@@ -1,8 +1,10 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/home.dart';
+import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/design.dart';
 import 'package:iamjagni/widgets/loading_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,15 +26,16 @@ class App extends StatelessWidget {
         //   return SomethingWentWrong();
         // }
 
+        // Show something whilst waiting for initialization to complete
         Widget shownWidget = LoadingScreen();
-        // Once complete, show your application
+        // Otherwise show application
         if (snapshot.connectionState == ConnectionState.done) {
           shownWidget = HomePage();
         }
 
-        // Otherwise, show something whilst waiting for initialization to complete
-
-        return MaterialApp(theme: appThemeData, home: shownWidget);
+        return Provider.value(
+            value: MainStore(),
+            child: MaterialApp(theme: appThemeData, home: shownWidget));
       },
     );
   }
