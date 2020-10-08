@@ -197,12 +197,14 @@ class FirestoreDAO {
     return query.docs;
   }
 
-  static Stream<List<DocumentSnapshot>> queryDocuments(
-      {String collectionPath,
-      Query buildQuery(CollectionReference collection)}) {
+  static Stream<List<DocumentSnapshot>> queryDocuments(String collectionPath,
+      {Query buildQuery(CollectionReference collection)}) {
     final collection = FirebaseFirestore.instance.collection(collectionPath);
-    final query = buildQuery(collection);
-    return query.snapshots().map((snap) => snap.docs);
+    if (buildQuery != null) {
+      final query = buildQuery(collection);
+      return query.snapshots().map((snap) => snap.docs);
+    }
+    return collection.snapshots().map((snap) => snap.docs);
   }
 
   static Future<List<DocumentSnapshot>> getDocumentsWithQuery(

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:iamjagni/utils/layout.dart';
 
-class LoadingScreen extends StatelessWidget {
+class BlankSlateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

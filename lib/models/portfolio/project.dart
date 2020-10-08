@@ -8,13 +8,16 @@ class Project extends FirebaseEntity {
   String iconUrl;
   List<String> screenshots;
   String description;
-  List<String> urls;
+  List<ProjectURL> urls;
   List<String> technologies;
   DateTime date;
 
   Project.withDoc(DocumentSnapshot doc) : super.withDoc(doc) {
     final map = doc.data();
     title = map['title'];
+    iconUrl = map['iconUrl'];
+    description = map['description'];
+    if (description != null) description = description.replaceAll("\\n", "\n");
     final timestamp = map['date'] as Timestamp;
     if (timestamp != null) {
       date = timestamp.toDate();
@@ -25,6 +28,20 @@ class Project extends FirebaseEntity {
     dynamicList.forEach((data) {
       screenshots.add(data);
     });
+
+    dynamicList = map['technologies'] ?? [];
+    technologies = [];
+    dynamicList.forEach((data) {
+      technologies.add(data);
+    });
+    technologies.sort();
+
+    dynamicList = map['urls'] ?? [];
+    urls = [];
+    dynamicList.forEach((data) {
+      urls.add(ProjectURL(data));
+    });
+    urls.sort();
   }
 
   @override
@@ -44,5 +61,20 @@ class Project extends FirebaseEntity {
     map["iconUrl"] = this.iconUrl;
     map["date"] = Timestamp.fromDate(date);
     return map;
+  }
+}
+
+class ProjectURL with Comparable {
+  String label;
+  String url;
+  ProjectURL(Map<String, dynamic> map) {
+    label = map["label"];
+    url = map["url"];
+  }
+
+  @override
+  int compareTo(other) {
+    if (other is ProjectURL) return this.label.compareTo(other.label);
+    return 0;
   }
 }
