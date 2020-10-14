@@ -42,8 +42,8 @@ class SingleFirebaseEntityDAO<T extends FirebaseEntity> {
 
   final StreamController<T> _streamController = StreamController<T>();
 
-  SingleFirebaseEntityDAO(String documentPath,
-      T Function(DocumentSnapshot doc) entityConstructor, String collectionPath,
+  SingleFirebaseEntityDAO(
+      String documentPath, T Function(DocumentSnapshot doc) entityConstructor,
       {bool Function(T) filter}) {
     _docStream = FirestoreDAO.trackDocumentByPath(documentPath);
 

@@ -35,7 +35,7 @@ class PortfolioCard extends StatelessWidget {
   }
 
   buildImage(Project project) {
-    var url = project.iconUrl;
+    var url = project.data.iconUrl;
     final asset = url == null;
     if (asset) {
       url = "assets/images/avatar.png";
@@ -48,7 +48,7 @@ class PortfolioCard extends StatelessWidget {
 
   buildTitle(Project project, BuildContext context) {
     final child = Text(
-      project.title,
+      project.data.title,
       style: Theme.of(context).textTheme.headline5,
       textAlign: TextAlign.center,
       maxLines: 1,

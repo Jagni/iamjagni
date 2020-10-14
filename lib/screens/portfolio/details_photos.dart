@@ -24,7 +24,7 @@ class PortfolioDetailsPhotos extends StatelessWidget {
                 controller: PageController(
                   initialPage: initialIndex,
                 ),
-                itemCount: project.screenshots.length,
+                itemCount: project.data.screenshots.length,
                 itemBuilder: (context, position) {
                   return Container(
                       child: PhotoView(
@@ -39,7 +39,7 @@ class PortfolioDetailsPhotos extends StatelessWidget {
                             );
                           },
                           imageProvider: CachedNetworkImageProvider(
-                              project.screenshots[position])));
+                              project.data.screenshots[position])));
                 },
               ),
             ),

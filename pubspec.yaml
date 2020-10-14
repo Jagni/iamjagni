@@ -45,6 +45,7 @@ dependencies:
   #Utilities
   connectivity: ^0.4.9+2
   url_launcher: ^5.7.2
+  json_serializable: ^3.5.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.

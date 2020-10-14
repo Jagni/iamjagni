@@ -1,8 +1,5 @@
-import 'dart:math';
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:iamjagni/models/portfolio/project.dart';
 import 'package:iamjagni/screens/portfolio/details_photos.dart';
 import 'package:iamjagni/store.dart';
@@ -19,8 +16,8 @@ class PortfolioDetails extends StatelessWidget {
   const PortfolioDetails({Key key, this.project}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final itemSize = min(AppLayout.maxContentWidth(context),
-        AppLayout.maxContentHeight(context));
+    final _itemProportion = AppLayout.screenIsLarge(context) ? 4 : 1.5;
+    final itemSize = AppLayout.maxContentWidth(context) / _itemProportion;
     return Consumer<MainStore>(builder: (context, store, widget) {
       return Scaffold(
           backgroundColor: cardColor,
@@ -28,45 +25,58 @@ class PortfolioDetails extends StatelessWidget {
             backgroundColor: primaryColor,
             title: Text("Detalhes"),
           ),
-          body: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(vertical: AppLayout.paddingSize),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(AppLayout.paddingSize),
+          body: Center(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(vertical: AppLayout.paddingSize),
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(
+                      maxWidth: AppLayout.maxContentWidth(context)),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                          Row(
-                            children: [
-                              SizedBox(width: 44, child: buildImage(project)),
-                              SizedBox(width: 4),
-                              Expanded(child: buildTitle(project, context)),
-                            ],
-                          ),
-                          SizedBox(height: 8),
-                          if (project.screenshots.length > 0)
-                            SizedBox(height: 16),
-                          if (project.screenshots.length > 0)
-                            buildScreenshotSlider(project, itemSize, context),
-                          if (project.screenshots.length > 0)
-                            SizedBox(height: 24),
-                          Text(project.description ?? "Sem descrição"),
-                          SizedBox(height: 8)
-                        ] +
-                        buildURLlist(project) +
-                        [buildTechnologyChips(project)],
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.all(AppLayout.paddingSize),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                                Row(
+                                  children: [
+                                    SizedBox(
+                                        width: 44, child: buildImage(project)),
+                                    SizedBox(width: 4),
+                                    Expanded(
+                                        child: buildTitle(project, context)),
+                                  ],
+                                ),
+                                SizedBox(height: 8),
+                                if (project.data.screenshots != null)
+                                  SizedBox(height: 16),
+                                if (project.data.screenshots != null)
+                                  buildScreenshotSlider(
+                                      project, itemSize, context),
+                                if (project.data.screenshots != null)
+                                  SizedBox(height: 24),
+                                Text(project.data.description ??
+                                    "Sem descrição"),
+                                SizedBox(height: 8)
+                              ] +
+                              buildURLlist(project) +
+                              [buildTechnologyChips(project)],
+                        ),
+                      )
+                    ],
                   ),
-                )
-              ],
+                ),
+              ),
             ),
           ));
     });
   }
 
   buildImage(Project project) {
-    var url = project.iconUrl;
+    var url = project.data.iconUrl;
     final asset = url == null;
     if (asset) {
       url = "assets/images/avatar.png";
@@ -78,7 +88,7 @@ class PortfolioDetails extends StatelessWidget {
   }
 
   buildTitle(Project project, BuildContext context) {
-    final child = Text(project.title,
+    final child = Text(project.data.title,
         style: Theme.of(context).textTheme.headline5.apply(color: Colors.white),
         maxLines: 1);
     return Hero(
@@ -93,7 +103,7 @@ class PortfolioDetails extends StatelessWidget {
       height: itemSize,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: project.screenshots.length,
+        itemCount: project.data.screenshots.length,
         clipBehavior: Clip.none,
         addAutomaticKeepAlives: false,
         addRepaintBoundaries: false,
@@ -123,7 +133,7 @@ class PortfolioDetails extends StatelessWidget {
                               }));
                     },
                     child: CachedImageWrapper(
-                      url: project.screenshots[index],
+                      url: project.data.screenshots[index],
                       fit: BoxFit.contain,
                     ),
                   )));
@@ -132,17 +142,18 @@ class PortfolioDetails extends StatelessWidget {
     );
   }
 
-  buildURLlist(Project project) {
+  List<Widget> buildURLlist(Project project) {
+    if (project.data.urls == null) return [];
     return List.generate(
-        project.urls.length,
+        project.data.urls.length,
         (index) => Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: RichText(
                   text: TextSpan(
-                text: project.urls[index].label,
+                text: project.data.urls[index].label,
                 recognizer: new TapGestureRecognizer()
                   ..onTap = () {
-                    launch(project.urls[index].url);
+                    launch(project.data.urls[index].url);
                   },
                 style: TextStyle(
                     color: primaryColor, decoration: TextDecoration.underline),
@@ -150,7 +161,8 @@ class PortfolioDetails extends StatelessWidget {
             ));
   }
 
-  buildTechnologyChips(Project project) {
+  Widget buildTechnologyChips(Project project) {
+    if (project.data.tech == null) return Container(height: 0);
     return Row(
       children: [
         Expanded(
@@ -158,18 +170,18 @@ class PortfolioDetails extends StatelessWidget {
               alignment: WrapAlignment.end,
               spacing: 8,
               children: List.generate(
-                project.technologies.length,
+                project.data.tech.length,
                 (index) => index % 2 == 0
                     ? Chip(
                         backgroundColor: backgroundColor,
                         label: Text(
-                          project.technologies[index],
+                          project.data.tech[index],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ))
                     : Chip(
                         backgroundColor: primaryColor,
                         label: Text(
-                          project.technologies[index],
+                          project.data.tech[index],
                           style: TextStyle(
                               color: cardColor, fontWeight: FontWeight.bold),
                         )),
