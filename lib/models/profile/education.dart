@@ -28,4 +28,6 @@ class EducationEntry extends FirebaseEntity {
     }
     return priorityComparison;
   }
+
+  static const pluralName = "education";
 }

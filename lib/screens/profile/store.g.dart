@@ -9,18 +9,34 @@ part of 'store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$ProfileStore on ProfileStoreBase, Store {
-  final _$projectsAtom = Atom(name: 'ProfileStoreBase.projects');
+  final _$profileAtom = Atom(name: 'ProfileStoreBase.profile');
 
   @override
-  ObservableStream<Profile> get projects {
-    _$projectsAtom.reportRead();
-    return super.projects;
+  ObservableStream<Profile> get profile {
+    _$profileAtom.reportRead();
+    return super.profile;
   }
 
   @override
-  set projects(ObservableStream<Profile> value) {
-    _$projectsAtom.reportWrite(value, super.projects, () {
-      super.projects = value;
+  set profile(ObservableStream<Profile> value) {
+    _$profileAtom.reportWrite(value, super.profile, () {
+      super.profile = value;
+    });
+  }
+
+  final _$educationEntriesAtom =
+      Atom(name: 'ProfileStoreBase.educationEntries');
+
+  @override
+  ObservableStream<List<EducationEntry>> get educationEntries {
+    _$educationEntriesAtom.reportRead();
+    return super.educationEntries;
+  }
+
+  @override
+  set educationEntries(ObservableStream<List<EducationEntry>> value) {
+    _$educationEntriesAtom.reportWrite(value, super.educationEntries, () {
+      super.educationEntries = value;
     });
   }
 
@@ -50,11 +66,22 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   }
 
   @override
-  dynamic setStream(Stream<dynamic> stream) {
+  dynamic setProfileStream(Stream<dynamic> stream) {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
-        name: 'ProfileStoreBase.setStream');
+        name: 'ProfileStoreBase.setProfileStream');
     try {
-      return super.setStream(stream);
+      return super.setProfileStream(stream);
+    } finally {
+      _$ProfileStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setEducationStream(Stream<dynamic> stream) {
+    final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
+        name: 'ProfileStoreBase.setEducationStream');
+    try {
+      return super.setEducationStream(stream);
     } finally {
       _$ProfileStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -63,7 +90,8 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   @override
   String toString() {
     return '''
-projects: ${projects}
+profile: ${profile},
+educationEntries: ${educationEntries}
     ''';
   }
 }

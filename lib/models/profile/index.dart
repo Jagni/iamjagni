@@ -3,10 +3,10 @@ import 'package:iamjagni/models/firebase/entity.dart';
 import 'package:iamjagni/models/profile/profile_data.dart';
 
 class Profile extends FirebaseEntity {
-  ProfileData personalData;
+  ProfileData data;
 
   Profile.withDoc(DocumentSnapshot doc) : super.withDoc(doc) {
-    personalData = ProfileData.fromJson(doc.data());
+    data = ProfileData.fromJson(doc.data());
   }
 
   @override

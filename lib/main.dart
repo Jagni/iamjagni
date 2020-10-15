@@ -35,7 +35,10 @@ class App extends StatelessWidget {
 
         return Provider.value(
             value: MainStore(),
-            child: MaterialApp(theme: appThemeData, home: shownWidget));
+            child: MaterialApp(
+                theme: appThemeData,
+                darkTheme: appThemeData,
+                home: shownWidget));
       },
     );
   }
