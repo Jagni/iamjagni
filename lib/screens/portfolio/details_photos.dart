@@ -11,12 +11,13 @@ class PortfolioDetailsPhotos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.black,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor,
         body: Column(
           children: [
             Expanded(
@@ -28,6 +29,8 @@ class PortfolioDetailsPhotos extends StatelessWidget {
                 itemBuilder: (context, position) {
                   return Container(
                       child: PhotoView(
+                          backgroundDecoration:
+                              BoxDecoration(color: backgroundColor),
                           heroAttributes: PhotoViewHeroAttributes(
                               tag: project.uid + position.toString()),
                           tightMode: true,

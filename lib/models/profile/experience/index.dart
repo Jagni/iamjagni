@@ -12,18 +12,10 @@ class Experience extends FirebaseEntity {
   @override
   int compareTo(other) {
     if (other is Experience) {
-      final priorityComparison =
-          this.data.priority.compareTo(other.data.priority);
-      if (priorityComparison == 0) {
-        return this
-            .data
-            .title
-            .toLowerCase()
-            .compareTo(other.data.title.toLowerCase());
-      }
+      return -this.data.startDate.compareTo(other.data.startDate);
     }
     return -1;
   }
 
-  static final pluralName = "profiles";
+  static final pluralName = "experiences";
 }

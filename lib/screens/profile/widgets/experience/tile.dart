@@ -58,13 +58,13 @@ class ExperienceTile extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Líder Técnico", style: textTheme.headline6),
+                      Text(experience.data.title, style: textTheme.headline6),
                       SizedBox(height: 3),
-                      Text("Unichristus",
+                      Text(experience.data.institution,
                           style: textTheme.subtitle1
                               .apply(color: textTheme.bodyText1.color)),
                       SizedBox(height: 3),
-                      Text("ago/2019 - jul/2020", style: textTheme.caption)
+                      Text(experience.data.dateString, style: textTheme.caption)
                     ],
                   )),
                 ]),
@@ -73,9 +73,7 @@ class ExperienceTile extends StatelessWidget {
                       top: 8.0,
                       left: 40 + AppLayout.paddingSize,
                       right: AppLayout.paddingSize),
-                  child: Text(
-                    "asd ipsum dolor sit amet sdasd sad ad ada dadad asda dadad asdas dad",
-                  ),
+                  child: Text(experience.data.description),
                 ),
               ),
             )

@@ -34,7 +34,7 @@ abstract class ProfileStoreBase with Store {
     skills = ObservableStream(_skillsDAO.stream);
 
     _experiencesDAO = FirebaseEntityDAO<Experience>(
-        Profile.pluralName + "/default/" + Skill.pluralName,
+        Profile.pluralName + "/default/" + Experience.pluralName,
         (doc) => Experience.withDoc(doc));
     experiences = ObservableStream(_experiencesDAO.stream);
   }
