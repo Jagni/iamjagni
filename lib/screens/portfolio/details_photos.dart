@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:iamjagni/models/portfolio/project.dart';
+import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:photo_view/photo_view.dart';
 
 class PortfolioDetailsPhotos extends StatelessWidget {
@@ -11,12 +11,13 @@ class PortfolioDetailsPhotos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.black,
+          backgroundColor: Theme.of(context).primaryColor,
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: backgroundColor,
         body: Column(
           children: [
             Expanded(
@@ -24,10 +25,12 @@ class PortfolioDetailsPhotos extends StatelessWidget {
                 controller: PageController(
                   initialPage: initialIndex,
                 ),
-                itemCount: project.screenshots.length,
+                itemCount: project.data.screenshots.length,
                 itemBuilder: (context, position) {
                   return Container(
                       child: PhotoView(
+                          backgroundDecoration:
+                              BoxDecoration(color: backgroundColor),
                           heroAttributes: PhotoViewHeroAttributes(
                               tag: project.uid + position.toString()),
                           tightMode: true,
@@ -39,7 +42,7 @@ class PortfolioDetailsPhotos extends StatelessWidget {
                             );
                           },
                           imageProvider: CachedNetworkImageProvider(
-                              project.screenshots[position])));
+                              project.data.screenshots[position])));
                 },
               ),
             ),

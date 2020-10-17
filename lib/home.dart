@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:iamjagni/screens/portfolio/index.dart';
+import 'package:iamjagni/screens/profile/index.dart';
 import 'package:iamjagni/widgets/fade_indexed_stack.dart';
 
 class HomePage extends StatefulWidget {
@@ -10,33 +11,14 @@ class HomePage extends StatefulWidget {
 class HomePageState extends State<HomePage> {
   var _currentIndex = 0;
   final widgetOptions = [
+    ProfileScreen(),
     PortfolioScreen(),
-    Center(child: Text("experiencia")),
-    Center(child: Text("skills")),
-    Center(child: Text("perfil"))
+    Center(child: Text("formação")),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Row(
-            children: [
-              Container(
-                width: 40,
-                height: 40,
-                decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.blueGrey,
-                    image: DecorationImage(
-                        image: AssetImage("assets/images/avatar.png"))),
-              ),
-              SizedBox(width: 4),
-              Text("Jagni Dasa"),
-            ],
-          ),
-          centerTitle: false,
-        ),
         body: SafeArea(
             child: FadeIndexedStack(
                 index: _currentIndex, children: widgetOptions)),
@@ -48,15 +30,13 @@ class HomePageState extends State<HomePage> {
           }),
           showUnselectedLabels: false,
           items: [
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
             BottomNavigationBarItem(
                 icon: Icon(Icons.folder_special), label: 'Portfólio'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.work),
-              label: 'Experiência',
-            ),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.code), label: 'Habilidades'),
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
+              icon: Icon(Icons.school),
+              label: 'Formação',
+            )
           ],
         ));
   }

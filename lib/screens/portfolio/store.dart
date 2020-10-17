@@ -1,5 +1,5 @@
 import 'package:iamjagni/models/firebase/entity_dao.dart';
-import 'package:iamjagni/models/portfolio/project.dart';
+import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:mobx/mobx.dart';
 
 part 'store.g.dart';
@@ -30,12 +30,5 @@ abstract class PortfolioStoreBase with Store {
   setStream(Stream stream) {
     disposeFirebaseListeners();
     projects = ObservableStream(stream);
-  }
-
-  @observable
-  Project selectedProject;
-  @action
-  setSelectedProject(Project project) {
-    selectedProject = project;
   }
 }

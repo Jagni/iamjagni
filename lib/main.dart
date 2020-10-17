@@ -27,15 +27,21 @@ class App extends StatelessWidget {
         // }
 
         // Show something whilst waiting for initialization to complete
-        Widget shownWidget = LoadingScreen();
+        Widget shownWidget = Scaffold(body: LoadingScreen());
+        MainStore store;
         // Otherwise show application
         if (snapshot.connectionState == ConnectionState.done) {
           shownWidget = HomePage();
+          store = MainStore();
+          store.setupFirebaseListeners();
         }
 
         return Provider.value(
-            value: MainStore(),
-            child: MaterialApp(theme: appThemeData, home: shownWidget));
+            value: store,
+            child: MaterialApp(
+                theme: brightAppThemeData,
+                darkTheme: darkAppThemeData,
+                home: shownWidget));
       },
     );
   }

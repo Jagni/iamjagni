@@ -9,7 +9,12 @@ import 'package:iamjagni/widgets/image/status.dart';
 class CachedImageWrapper extends StatelessWidget {
   final String url;
   final BoxFit fit;
-  const CachedImageWrapper({Key key, this.url, this.fit = BoxFit.cover})
+  final Alignment alignment;
+  const CachedImageWrapper(
+      {Key key,
+      this.url,
+      this.fit = BoxFit.cover,
+      this.alignment = Alignment.center})
       : super(key: key);
   @override
   Widget build(BuildContext context) {
@@ -18,11 +23,11 @@ class CachedImageWrapper extends StatelessWidget {
       return CachedNetworkImage(
           fit: fit,
           imageUrl: url,
-          placeholder: (context, url) => Container(
-              color: backgroundColor,
-              child: Center(child: CircularProgressIndicator())),
+          alignment: alignment,
+          placeholder: (context, url) =>
+              Container(child: Center(child: CircularProgressIndicator())),
           errorWidget: (context, url, error) => Container(
-                color: backgroundColor,
+                color: Theme.of(context).accentColor,
                 child: Padding(
                   padding: EdgeInsets.all(AppLayout.paddingSize),
                   child: Column(
