@@ -24,19 +24,33 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
     });
   }
 
-  final _$educationEntriesAtom =
-      Atom(name: 'ProfileStoreBase.educationEntries');
+  final _$skillsAtom = Atom(name: 'ProfileStoreBase.skills');
 
   @override
-  ObservableStream<List<EducationEntry>> get educationEntries {
-    _$educationEntriesAtom.reportRead();
-    return super.educationEntries;
+  ObservableStream<List<Skill>> get skills {
+    _$skillsAtom.reportRead();
+    return super.skills;
   }
 
   @override
-  set educationEntries(ObservableStream<List<EducationEntry>> value) {
-    _$educationEntriesAtom.reportWrite(value, super.educationEntries, () {
-      super.educationEntries = value;
+  set skills(ObservableStream<List<Skill>> value) {
+    _$skillsAtom.reportWrite(value, super.skills, () {
+      super.skills = value;
+    });
+  }
+
+  final _$experiencesAtom = Atom(name: 'ProfileStoreBase.experiences');
+
+  @override
+  ObservableStream<List<Experience>> get experiences {
+    _$experiencesAtom.reportRead();
+    return super.experiences;
+  }
+
+  @override
+  set experiences(ObservableStream<List<Experience>> value) {
+    _$experiencesAtom.reportWrite(value, super.experiences, () {
+      super.experiences = value;
     });
   }
 
@@ -77,11 +91,22 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   }
 
   @override
-  dynamic setEducationStream(Stream<dynamic> stream) {
+  dynamic setExperienceStream(Stream<dynamic> stream) {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
-        name: 'ProfileStoreBase.setEducationStream');
+        name: 'ProfileStoreBase.setExperienceStream');
     try {
-      return super.setEducationStream(stream);
+      return super.setExperienceStream(stream);
+    } finally {
+      _$ProfileStoreBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  dynamic setSkillsStream(Stream<dynamic> stream) {
+    final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
+        name: 'ProfileStoreBase.setSkillsStream');
+    try {
+      return super.setSkillsStream(stream);
     } finally {
       _$ProfileStoreBaseActionController.endAction(_$actionInfo);
     }
@@ -91,7 +116,8 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   String toString() {
     return '''
 profile: ${profile},
-educationEntries: ${educationEntries}
+skills: ${skills},
+experiences: ${experiences}
     ''';
   }
 }

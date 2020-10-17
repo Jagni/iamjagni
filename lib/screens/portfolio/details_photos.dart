@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:iamjagni/models/portfolio/project.dart';
+import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:photo_view/photo_view.dart';
 
 class PortfolioDetailsPhotos extends StatelessWidget {

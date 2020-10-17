@@ -27,7 +27,7 @@ class FirebaseEntityDAO<T extends FirebaseEntity> {
   }
 
   Stream<List<T>> get stream {
-    return _streamController.stream;
+    return _streamController.stream.asBroadcastStream();
   }
 
   dispose() {

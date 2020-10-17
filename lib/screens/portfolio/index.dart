@@ -1,61 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:iamjagni/models/portfolio/project.dart';
-import 'package:iamjagni/screens/portfolio/store.dart';
+import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:iamjagni/screens/portfolio/widgets/card.dart';
-import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/layout.dart';
-import 'package:iamjagni/widgets/status_screens/blank_slate.dart';
-import 'package:iamjagni/widgets/status_screens/error.dart';
-import 'package:iamjagni/widgets/status_screens/loading.dart';
-import 'package:provider/provider.dart';
+import 'package:iamjagni/widgets/store_stream_builder.dart';
 
-class PortfolioScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => PortfolioScreenState();
-}
-
-class PortfolioScreenState extends State<PortfolioScreen> {
-  PortfolioStore store;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final mainStore = Provider.of<MainStore>(context, listen: false);
-    store = mainStore.portfolio;
-    store.setupFirebaseListeners();
-  }
-
+class PortfolioScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder(
-        stream: store.projects,
-        builder: (context, snapshot) {
-          switch (snapshot.connectionState) {
-            case ConnectionState.none:
-              return ErrorScreen();
-              break;
-            case ConnectionState.waiting:
-              return LoadingScreen();
-              break;
-            case ConnectionState.active:
-              if (snapshot.hasData) {
-                return buildList(snapshot.data);
-              }
-              return BlankSlateScreen();
-              break;
-            case ConnectionState.done:
-              if (snapshot.hasData) {
-                return buildList(snapshot.data);
-              }
-              return ErrorScreen();
-              break;
-          }
-          return BlankSlateScreen();
-        });
+    return StoreStreamBuilder<List<Project>>(builder: (projects, context) {
+      return buildList(projects, context);
+    }, selectedStream: (store) {
+      return store.portfolio.projects;
+    });
   }
 
-  buildList(List<Project> projects) {
+  buildList(List<Project> projects, BuildContext context) {
     return Center(
       child: Container(
         width: AppLayout.maxContentWidth(context),

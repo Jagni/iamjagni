@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:iamjagni/models/portfolio/project.dart';
+import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:iamjagni/screens/portfolio/details_photos.dart';
 import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/design.dart';
@@ -16,13 +16,14 @@ class PortfolioDetails extends StatelessWidget {
   const PortfolioDetails({Key key, this.project}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     final _itemProportion = AppLayout.screenIsLarge(context) ? 4 : 1.5;
     final itemSize = AppLayout.maxContentWidth(context) / _itemProportion;
     return Consumer<MainStore>(builder: (context, store, widget) {
       return Scaffold(
-          backgroundColor: cardColor,
+          backgroundColor: theme.cardColor,
           appBar: AppBar(
-            backgroundColor: primaryColor,
+            backgroundColor: theme.primaryColor,
             title: Text("Detalhes"),
           ),
           body: Center(
@@ -62,8 +63,8 @@ class PortfolioDetails extends StatelessWidget {
                                     "Sem descrição"),
                                 SizedBox(height: 8)
                               ] +
-                              buildURLlist(project) +
-                              [buildTechnologyChips(project)],
+                              buildURLlist(project, context) +
+                              [buildTechnologyChips(project, context)],
                         ),
                       )
                     ],
@@ -89,8 +90,7 @@ class PortfolioDetails extends StatelessWidget {
 
   buildTitle(Project project, BuildContext context) {
     final child = Text(project.data.title,
-        style: Theme.of(context).textTheme.headline5.apply(color: Colors.white),
-        maxLines: 1);
+        style: Theme.of(context).textTheme.headline5, maxLines: 1);
     return Hero(
         transitionOnUserGestures: true,
         tag: project.uid + "title",
@@ -115,7 +115,7 @@ class PortfolioDetails extends StatelessWidget {
           return Hero(
               tag: project.uid + index.toString(),
               child: Card(
-                  color: backgroundColor,
+                  color: Theme.of(context).scaffoldBackgroundColor,
                   clipBehavior: Clip.antiAlias,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16)),
@@ -142,7 +142,7 @@ class PortfolioDetails extends StatelessWidget {
     );
   }
 
-  List<Widget> buildURLlist(Project project) {
+  List<Widget> buildURLlist(Project project, BuildContext context) {
     if (project.data.urls == null) return [];
     return List.generate(
         project.data.urls.length,
@@ -156,12 +156,13 @@ class PortfolioDetails extends StatelessWidget {
                     launch(project.data.urls[index].url);
                   },
                 style: TextStyle(
-                    color: primaryColor, decoration: TextDecoration.underline),
+                    color: Theme.of(context).primaryColor,
+                    decoration: TextDecoration.underline),
               )),
             ));
   }
 
-  Widget buildTechnologyChips(Project project) {
+  Widget buildTechnologyChips(Project project, BuildContext context) {
     if (project.data.tech == null) return Container(height: 0);
     return Row(
       children: [
@@ -173,17 +174,19 @@ class PortfolioDetails extends StatelessWidget {
                 project.data.tech.length,
                 (index) => index % 2 == 0
                     ? Chip(
-                        backgroundColor: backgroundColor,
+                        backgroundColor:
+                            Theme.of(context).scaffoldBackgroundColor,
                         label: Text(
                           project.data.tech[index],
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ))
                     : Chip(
-                        backgroundColor: primaryColor,
+                        backgroundColor: Theme.of(context).primaryColor,
                         label: Text(
                           project.data.tech[index],
                           style: TextStyle(
-                              color: cardColor, fontWeight: FontWeight.bold),
+                              color: Theme.of(context).cardColor,
+                              fontWeight: FontWeight.bold),
                         )),
               )),
         ),

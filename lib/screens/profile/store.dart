@@ -1,6 +1,7 @@
 import 'package:iamjagni/models/firebase/entity_dao.dart';
-import 'package:iamjagni/models/profile/education.dart';
+import 'package:iamjagni/models/profile/experience/index.dart';
 import 'package:iamjagni/models/profile/index.dart';
+import 'package:iamjagni/models/profile/skill/index.dart';
 import 'package:mobx/mobx.dart';
 
 part 'store.g.dart';
@@ -9,12 +10,15 @@ class ProfileStore = ProfileStoreBase with _$ProfileStore;
 
 abstract class ProfileStoreBase with Store {
   SingleFirebaseEntityDAO<Profile> _profileDAO;
-  FirebaseEntityDAO<EducationEntry> _educationDAO;
+  FirebaseEntityDAO<Skill> _skillsDAO;
+  FirebaseEntityDAO<Experience> _experiencesDAO;
 
   @observable
   ObservableStream<Profile> profile;
   @observable
-  ObservableStream<List<EducationEntry>> educationEntries;
+  ObservableStream<List<Skill>> skills;
+  @observable
+  ObservableStream<List<Experience>> experiences;
 
   @action
   setupFirebaseListeners() {
@@ -24,10 +28,15 @@ abstract class ProfileStoreBase with Store {
         Profile.pluralName + "/default", (doc) => Profile.withDoc(doc));
     profile = ObservableStream(_profileDAO.stream);
 
-    _educationDAO = FirebaseEntityDAO<EducationEntry>(
-        Profile.pluralName + "/default" + EducationEntry.pluralName,
-        (doc) => EducationEntry.withDoc(doc));
-    educationEntries = ObservableStream(_educationDAO.stream);
+    _skillsDAO = FirebaseEntityDAO<Skill>(
+        Profile.pluralName + "/default/" + Skill.pluralName,
+        (doc) => Skill.withDoc(doc));
+    skills = ObservableStream(_skillsDAO.stream);
+
+    _experiencesDAO = FirebaseEntityDAO<Experience>(
+        Profile.pluralName + "/default/" + Skill.pluralName,
+        (doc) => Experience.withDoc(doc));
+    experiences = ObservableStream(_experiencesDAO.stream);
   }
 
   @action
@@ -35,8 +44,11 @@ abstract class ProfileStoreBase with Store {
     if (_profileDAO != null) {
       _profileDAO.dispose();
     }
-    if (_educationDAO != null) {
-      _educationDAO.dispose();
+    if (_skillsDAO != null) {
+      _skillsDAO.dispose();
+    }
+    if (_experiencesDAO != null) {
+      _experiencesDAO.dispose();
     }
   }
 
@@ -47,8 +59,14 @@ abstract class ProfileStoreBase with Store {
   }
 
   @action
-  setEducationStream(Stream stream) {
+  setExperienceStream(Stream stream) {
     disposeFirebaseListeners();
-    educationEntries = ObservableStream(stream);
+    experiences = ObservableStream(stream);
+  }
+
+  @action
+  setSkillsStream(Stream stream) {
+    disposeFirebaseListeners();
+    skills = ObservableStream(stream);
   }
 }

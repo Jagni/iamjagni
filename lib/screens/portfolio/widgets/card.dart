@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:iamjagni/models/portfolio/project.dart';
+import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:iamjagni/screens/portfolio/details.dart';
 import 'package:iamjagni/store.dart';
 import 'package:iamjagni/widgets/image/circle_image.dart';

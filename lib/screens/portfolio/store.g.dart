@@ -24,22 +24,6 @@ mixin _$PortfolioStore on PortfolioStoreBase, Store {
     });
   }
 
-  final _$selectedProjectAtom =
-      Atom(name: 'PortfolioStoreBase.selectedProject');
-
-  @override
-  Project get selectedProject {
-    _$selectedProjectAtom.reportRead();
-    return super.selectedProject;
-  }
-
-  @override
-  set selectedProject(Project value) {
-    _$selectedProjectAtom.reportWrite(value, super.selectedProject, () {
-      super.selectedProject = value;
-    });
-  }
-
   final _$PortfolioStoreBaseActionController =
       ActionController(name: 'PortfolioStoreBase');
 
@@ -77,21 +61,9 @@ mixin _$PortfolioStore on PortfolioStoreBase, Store {
   }
 
   @override
-  dynamic setSelectedProject(Project project) {
-    final _$actionInfo = _$PortfolioStoreBaseActionController.startAction(
-        name: 'PortfolioStoreBase.setSelectedProject');
-    try {
-      return super.setSelectedProject(project);
-    } finally {
-      _$PortfolioStoreBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
-projects: ${projects},
-selectedProject: ${selectedProject}
+projects: ${projects}
     ''';
   }
 }
