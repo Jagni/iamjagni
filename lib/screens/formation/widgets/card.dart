@@ -34,10 +34,10 @@ class FormationCard extends StatelessWidget {
       SizedBox(height: AppLayout.paddingSize),
       Expanded(
         child: SizedBox(
-          width: AppLayout.maxContentWidth(context) * 0.8,
+          width: AppLayout.maxContentWidth(context),
           child: DoubleCard(
             child: SizedBox(
-              width: AppLayout.maxContentWidth(context) * 0.8,
+              width: AppLayout.maxContentWidth(context),
               child: Center(
                 child: SingleChildScrollView(
                     padding: EdgeInsets.symmetric(

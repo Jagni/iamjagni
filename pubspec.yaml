@@ -33,6 +33,16 @@ dependencies:
   sliding_sheet: ^0.4.0 
   social_media_buttons: ^0.1.2
   snapping_page_scroll: ^1.2.7
+  hexagonal_grid: ^1.0.5
+  hexagonal_grid_widget:
+    git:
+      url: https://gitlab.com/Jagni/hexagonal_grid_widget.git
+      ref: snap
+
+  # hexagonal_grid_widget:
+  #   git:
+  #     url: https://gitlab.com/Jagni/hexagonal_grid_widget.git
+  #     ref: snap
   
   #State
   mobx: ^1.2.1+2
