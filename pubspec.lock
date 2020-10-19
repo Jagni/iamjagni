@@ -8,6 +8,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.0.0"
+  after_layout:
+    dependency: transitive
+    description:
+      name: after_layout
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.7+2"
   analyzer:
     dependency: transitive
     description:
@@ -373,6 +380,22 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.2.0"
+  hexagonal_grid:
+    dependency: "direct main"
+    description:
+      name: hexagonal_grid
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.5"
+  hexagonal_grid_widget:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: snap
+      resolved-ref: "3109b1e1ae6212d2ae8e5f22cd1dcebea43170c1"
+      url: "https://gitlab.com/Jagni/hexagonal_grid_widget.git"
+    source: git
+    version: "1.0.3"
   html:
     dependency: transitive
     description:
@@ -767,6 +790,13 @@ packages:
     dependency: "direct main"
     description:
       name: tinycolor
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
+  tuple:
+    dependency: transitive
+    description:
+      name: tuple
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.3"
