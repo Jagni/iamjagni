@@ -5,7 +5,7 @@ import 'package:iamjagni/widgets/status_screens/error.dart';
 import 'package:iamjagni/widgets/status_screens/loading.dart';
 import 'package:provider/provider.dart';
 
-class StoreStreamBuilder<T> extends StatelessWidget {
+class StoreStreamBuilder<T> extends StatefulWidget {
   final bool list;
   final Stream<T> Function(MainStore) selectedStream;
   final Widget Function(T, BuildContext) builder;
@@ -18,37 +18,53 @@ class StoreStreamBuilder<T> extends StatelessWidget {
       : super(key: key);
 
   @override
+  State<StatefulWidget> createState() => StoreStreamBuilderState<T>();
+}
+
+class StoreStreamBuilderState<T> extends State<StoreStreamBuilder<T>> {
+  MainStore store;
+  Stream<T> stream;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    store = Provider.of<MainStore>(context, listen: false);
+    stream = widget.selectedStream(store);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Consumer<MainStore>(builder: (context, store, widget) {
-      return StreamBuilder(
-          stream: selectedStream(store),
-          builder: (context, snapshot) {
-            switch (snapshot.connectionState) {
-              case ConnectionState.none:
-                return ErrorScreen();
-                break;
-              case ConnectionState.waiting:
-                return LoadingScreen();
-                break;
-              case ConnectionState.active:
-                if (list) {
-                  if (snapshot.hasData && snapshot.data.length > 0) {
-                    return builder(snapshot.data, context);
-                  }
-                } else if (snapshot.hasData) {
-                  return builder(snapshot.data, context);
-                }
-                return BlankSlateScreen();
-                break;
-              case ConnectionState.done:
-                if (snapshot.hasData) {
-                  return builder(snapshot.data, context);
-                }
-                return ErrorScreen();
-                break;
-            }
-            return BlankSlateScreen();
-          });
-    });
+    return StreamBuilder(
+        stream: stream,
+        builder: (context, snapshot) {
+          final shownWidget = callBuilder(snapshot);
+          if (shownWidget != null) {
+            return shownWidget;
+          }
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+              return ErrorScreen();
+              break;
+            case ConnectionState.waiting:
+              return LoadingScreen();
+              break;
+            case ConnectionState.active:
+              break;
+            case ConnectionState.done:
+              break;
+          }
+          return BlankSlateScreen();
+        });
+  }
+
+  Widget callBuilder(AsyncSnapshot snapshot) {
+    if (widget.list) {
+      if (snapshot.hasData && snapshot.data.length > 0) {
+        return widget.builder(snapshot.data, context);
+      }
+    } else if (snapshot.hasData) {
+      return widget.builder(snapshot.data, context);
+    }
+    return null;
   }
 }

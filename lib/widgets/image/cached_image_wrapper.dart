@@ -2,7 +2,6 @@ import 'dart:math';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:iamjagni/utils/design.dart';
 import 'package:iamjagni/utils/layout.dart';
 import 'package:iamjagni/widgets/image/status.dart';
 

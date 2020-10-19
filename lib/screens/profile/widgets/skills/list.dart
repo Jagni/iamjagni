@@ -20,6 +20,11 @@ class SkillsList extends StatelessWidget {
         clipBehavior: Clip.none,
         child: Row(
             mainAxisSize: MainAxisSize.min,
-            children: skills.map((skill) => SkillTile(skill: skill)).toList()));
+            children: skills
+                .map((skill) => Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: SkillTile(skill: skill),
+                    ))
+                .toList()));
   }
 }

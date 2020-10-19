@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:iamjagni/screens/portfolio/details_photos.dart';
 import 'package:iamjagni/store.dart';
-import 'package:iamjagni/utils/design.dart';
 import 'package:iamjagni/utils/layout.dart';
 import 'package:iamjagni/widgets/image/circle_image.dart';
 import 'package:iamjagni/widgets/image/cached_image_wrapper.dart';
