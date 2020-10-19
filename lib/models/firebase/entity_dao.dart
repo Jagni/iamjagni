@@ -3,13 +3,13 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iamjagni/models/firebase/firestore_dao.dart';
 import 'package:iamjagni/models/firebase/entity.dart';
+import 'package:rxdart/subjects.dart';
 
 class FirebaseEntityDAO<T extends FirebaseEntity> {
   Stream<List<DocumentSnapshot>> _docStream;
   StreamSubscription _docSubscription;
 
-  final StreamController<List<T>> _streamController =
-      StreamController<List<T>>();
+  final StreamController<List<T>> _streamController = BehaviorSubject();
 
   FirebaseEntityDAO(
       String collectionPath, T Function(DocumentSnapshot doc) entityConstructor,
@@ -27,7 +27,7 @@ class FirebaseEntityDAO<T extends FirebaseEntity> {
   }
 
   Stream<List<T>> get stream {
-    return _streamController.stream.asBroadcastStream();
+    return _streamController.stream;
   }
 
   dispose() {

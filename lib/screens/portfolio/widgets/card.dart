@@ -20,15 +20,18 @@ class PortfolioCard extends StatelessWidget {
             return PortfolioDetails(project: project);
           }));
         },
-        child: Column(
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Expanded(
-              child: buildImage(project),
-            ),
-            SizedBox(height: 8),
-            buildTitle(project, context),
-          ],
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.max,
+            children: [
+              Expanded(
+                child: buildImage(project),
+              ),
+              SizedBox(height: 8),
+              buildTitle(project, context),
+            ],
+          ),
         ),
       );
     });

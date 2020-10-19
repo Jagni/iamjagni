@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:iamjagni/screens/formation/index.dart';
 import 'package:iamjagni/screens/portfolio/index.dart';
 import 'package:iamjagni/screens/profile/index.dart';
 import 'package:iamjagni/widgets/fade_indexed_stack.dart';
@@ -10,10 +11,10 @@ class HomePage extends StatefulWidget {
 
 class HomePageState extends State<HomePage> {
   var _currentIndex = 0;
-  final widgetOptions = [
+  final List<Widget> widgetOptions = [
     ProfileScreen(),
     PortfolioScreen(),
-    Center(child: Text("formação")),
+    FormationScreen(),
   ];
 
   @override
