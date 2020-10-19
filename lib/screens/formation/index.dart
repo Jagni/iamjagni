@@ -52,7 +52,7 @@ class FormationScreenState extends State<FormationScreen> {
                   clipBehavior: Clip.none,
                   onPageChanged: (index) {
                     setState(() {
-                      this.page = index;
+                      page = index;
                     });
                   },
                   children: experiences

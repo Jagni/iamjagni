@@ -19,7 +19,7 @@ class FormationCard extends StatelessWidget {
       Container(
         width: 20,
         height: 20,
-        decoration: new BoxDecoration(
+        decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: Colors.white, width: 3),
             color: Theme.of(context).primaryColor,
@@ -27,7 +27,7 @@ class FormationCard extends StatelessWidget {
               BoxShadow(
                 color: Colors.black.withAlpha(50),
                 blurRadius: 1,
-                offset: new Offset(0.0, 1.0),
+                offset: Offset(0.0, 1.0),
               ),
             ]),
       ),
@@ -63,7 +63,7 @@ class FormationCard extends StatelessWidget {
     ]);
   }
 
-  buildHeader(BuildContext context) {
+  Widget buildHeader(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return Row(
         mainAxisSize: MainAxisSize.min,

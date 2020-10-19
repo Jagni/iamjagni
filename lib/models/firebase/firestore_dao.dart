@@ -55,7 +55,8 @@ class FirestoreDAO {
     return false;
   }
 
-  static Future<bool> updateEntityWithMap(String entityPath, dynamic value,
+  static Future<bool> updateEntityWithMap(
+      String entityPath, Map<String, dynamic> value,
       {bool saveOffline = true}) async {
     if (!saveOffline) {
       if (!await hasConnection()) {
@@ -74,7 +75,8 @@ class FirestoreDAO {
     return false;
   }
 
-  static Future<bool> setEntityWithMap(String entityPath, dynamic value,
+  static Future<bool> setEntityWithMap(
+      String entityPath, Map<String, dynamic> value,
       {bool saveOffline = true}) async {
     if (!saveOffline) {
       if (!await hasConnection()) {
@@ -107,7 +109,7 @@ class FirestoreDAO {
     if (entityPath != null) {
       try {
         final union = FieldValue.arrayUnion([value]);
-        final map = Map<String, dynamic>();
+        final map = <String, dynamic>{};
         map[arrayName] = union;
         await FirebaseFirestore.instance
             .doc(entityPath)
@@ -133,7 +135,7 @@ class FirestoreDAO {
     if (entityPath != null) {
       try {
         final remove = FieldValue.arrayRemove([value]);
-        final map = Map<String, dynamic>();
+        final map = <String, dynamic>{};
         map[arrayName] = remove;
         await FirebaseFirestore.instance
             .doc(entityPath)
@@ -198,7 +200,7 @@ class FirestoreDAO {
   }
 
   static Stream<List<DocumentSnapshot>> queryDocuments(String collectionPath,
-      {Query buildQuery(CollectionReference collection)}) {
+      {Query Function(CollectionReference collection) buildQuery}) {
     final collection = FirebaseFirestore.instance.collection(collectionPath);
     if (buildQuery != null) {
       final query = buildQuery(collection);
@@ -209,7 +211,7 @@ class FirestoreDAO {
 
   static Future<List<DocumentSnapshot>> getDocumentsWithQuery(
       {String collectionPath,
-      Query buildQuery(CollectionReference collection)}) async {
+      Query Function(CollectionReference collection) buildQuery}) async {
     final collection = FirebaseFirestore.instance.collection(collectionPath);
     final query = buildQuery(collection);
     final snapshot = await query.get();

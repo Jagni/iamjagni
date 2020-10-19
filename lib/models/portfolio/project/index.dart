@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:iamjagni/models/firebase/entity.dart';
 import 'package:iamjagni/models/portfolio/project/data.dart';
@@ -14,21 +12,17 @@ class Project extends FirebaseEntity {
   @override
   int compareTo(other) {
     if (other is Project) {
-      return this
-          .data
-          .title
-          .toLowerCase()
-          .compareTo(other.data.title.toLowerCase());
+      return data.title.toLowerCase().compareTo(other.data.title.toLowerCase());
     }
     return -1;
   }
 
-  static String pluralName = "projects";
+  static String pluralName = 'projects';
 
   @override
-  LinkedHashMap<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     final map = super.toMap();
-    map.addAll(this.data.toJson());
+    map.addAll(data.toJson());
     return map;
   }
 }

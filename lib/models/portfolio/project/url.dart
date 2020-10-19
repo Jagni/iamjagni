@@ -10,7 +10,7 @@ class ProjectURL with Comparable {
 
   @override
   int compareTo(other) {
-    if (other is ProjectURL) return this.label.compareTo(other.label);
+    if (other is ProjectURL) return label.compareTo(other.label);
     return 0;
   }
 

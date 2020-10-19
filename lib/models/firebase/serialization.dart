@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 class SerializationHelper {
   static String formatFirebaseText(String text) {
     if (text != null) {
-      return text.replaceAll("\\n", "\n");
+      return text.replaceAll('\\n', '\n');
     }
     return text;
   }

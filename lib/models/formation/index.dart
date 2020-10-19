@@ -11,19 +11,22 @@ class FormationEntry extends FirebaseEntity {
 
   @override
   int compareTo(other) {
-    final dateDifference =
-        this.data.finishDate.difference(other.data.finishDate).inDays;
-    var dateComparison = 0;
-    if (dateDifference.abs() > 30) {
-      if (dateDifference.isNegative) {
-        dateComparison = 1;
-      } else {
-        dateComparison = -1;
+    if (other is FormationEntry) {
+      final dateDifference =
+          data.finishDate.difference(other.data.finishDate).inDays;
+      var dateComparison = 0;
+      if (dateDifference.abs() > 30) {
+        if (dateDifference.isNegative) {
+          dateComparison = 1;
+        } else {
+          dateComparison = -1;
+        }
+        return data.title.compareTo(other.data.title);
       }
-      return this.data.title.compareTo(other.data.title);
+      return dateComparison;
     }
-    return dateComparison;
+    return -1;
   }
 
-  static const pluralName = "formation";
+  static const pluralName = 'formation';
 }

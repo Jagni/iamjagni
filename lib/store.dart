@@ -6,10 +6,10 @@ import 'package:mobx/mobx.dart';
 part 'store.g.dart';
 
 class MainStore extends MainStoreBase with _$MainStore {
-  setupFirebaseListeners() {
-    this.portfolio.setupFirebaseListeners();
-    this.profile.setupFirebaseListeners();
-    this.formation.setupFirebaseListeners();
+  void setupFirebaseListeners() {
+    portfolio.setupFirebaseListeners();
+    profile.setupFirebaseListeners();
+    formation.setupFirebaseListeners();
   }
 }
 

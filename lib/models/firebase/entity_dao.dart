@@ -30,7 +30,7 @@ class FirebaseEntityDAO<T extends FirebaseEntity> {
     return _streamController.stream;
   }
 
-  dispose() {
+  void dispose() {
     _streamController.close();
     _docSubscription.cancel();
   }
@@ -56,7 +56,7 @@ class SingleFirebaseEntityDAO<T extends FirebaseEntity> {
     return _streamController.stream;
   }
 
-  dispose() {
+  void dispose() {
     _streamController.close();
     _docSubscription.cancel();
   }

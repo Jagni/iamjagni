@@ -24,7 +24,7 @@ class PortfolioScreen extends StatelessWidget {
     });
   }
 
-  buildList(List<Project> projects, BuildContext context) {
+  Widget buildList(List<Project> projects, BuildContext context) {
     final containerSize = min(
         AppLayout.maxContentWidth(context) - AppLayout.paddingSize * 2,
         AppLayout.maxContentHeight(context) - AppLayout.paddingSize * 2);

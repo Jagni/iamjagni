@@ -13,7 +13,7 @@ abstract class FormationStoreBase with Store {
   ObservableStream<List<FormationEntry>> entries;
 
   @action
-  setupFirebaseListeners() {
+  void setupFirebaseListeners() {
     disposeFirebaseListeners();
 
     _formationDAO = FirebaseEntityDAO<FormationEntry>(
@@ -22,14 +22,14 @@ abstract class FormationStoreBase with Store {
   }
 
   @action
-  disposeFirebaseListeners() {
+  void disposeFirebaseListeners() {
     if (_formationDAO != null) {
       _formationDAO.dispose();
     }
   }
 
   @action
-  setFormationStream(Stream stream) {
+  void setFormationStream(Stream<List<FormationEntry>> stream) {
     disposeFirebaseListeners();
     entries = ObservableStream(stream);
   }

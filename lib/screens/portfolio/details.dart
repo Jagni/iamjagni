@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioDetails extends StatelessWidget {
-  static const routeName = "PortfolioDetails";
+  static const routeName = 'PortfolioDetails';
   final Project project;
   const PortfolioDetails({Key key, this.project}) : super(key: key);
   @override
@@ -23,7 +23,7 @@ class PortfolioDetails extends StatelessWidget {
           backgroundColor: theme.cardColor,
           appBar: AppBar(
             backgroundColor: theme.primaryColor,
-            title: Text("Detalhes"),
+            title: Text('Detalhes'),
           ),
           body: Center(
             child: SingleChildScrollView(
@@ -59,7 +59,7 @@ class PortfolioDetails extends StatelessWidget {
                                 if (project.data.screenshots != null)
                                   SizedBox(height: 24),
                                 Text(project.data.description ??
-                                    "Sem descrição"),
+                                    'Sem descrição'),
                                 SizedBox(height: 8)
                               ] +
                               buildURLlist(project, context) +
@@ -75,28 +75,28 @@ class PortfolioDetails extends StatelessWidget {
     });
   }
 
-  buildImage(Project project) {
+  Widget buildImage(Project project) {
     var url = project.data.iconUrl;
     final asset = url == null;
     if (asset) {
-      url = "assets/images/avatar.png";
+      url = 'assets/images/avatar.png';
     }
     return Hero(
         transitionOnUserGestures: true,
-        tag: project.uid + "icon",
+        tag: project.uid + 'icon',
         child: CircleImage(url: url, asset: asset));
   }
 
-  buildTitle(Project project, BuildContext context) {
+  Widget buildTitle(Project project, BuildContext context) {
     final child = Text(project.data.title,
         style: Theme.of(context).textTheme.headline5, maxLines: 1);
     return Hero(
         transitionOnUserGestures: true,
-        tag: project.uid + "title",
+        tag: project.uid + 'title',
         child: child);
   }
 
-  buildScreenshotSlider(
+  Widget buildScreenshotSlider(
       Project project, double itemSize, BuildContext context) {
     return SizedBox(
       height: itemSize,
@@ -150,7 +150,7 @@ class PortfolioDetails extends StatelessWidget {
               child: RichText(
                   text: TextSpan(
                 text: project.data.urls[index].label,
-                recognizer: new TapGestureRecognizer()
+                recognizer: TapGestureRecognizer()
                   ..onTap = () {
                     launch(project.data.urls[index].url);
                   },

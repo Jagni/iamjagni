@@ -24,14 +24,14 @@ class ExperienceData {
       fromJson: SerializationHelper.dateTimeFromTimestamp)
   final DateTime finishDate;
 
-  get dateString {
-    final DateFormat formatter = DateFormat('MMM/yy');
-    final String formattedStart = formatter.format(startDate);
-    String formattedEnd = "Atual";
+  String get dateString {
+    final formatter = DateFormat('MMM/yy');
+    final formattedStart = formatter.format(startDate);
+    var formattedEnd = 'Atual';
     if (finishDate != null) {
       formattedEnd = formatter.format(finishDate);
     }
-    return formattedStart + " - " + formattedEnd;
+    return formattedStart + ' - ' + formattedEnd;
   }
 
   ExperienceData(

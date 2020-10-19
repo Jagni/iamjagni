@@ -6,19 +6,19 @@ class ProfileContactList extends StatelessWidget {
   final contactTiles = [
     ContactTile(
         icon: SocialMediaIcons.linkedin_squared,
-        name: "LinkedIn",
+        name: 'LinkedIn',
         color: Colors.blue[700],
-        url: "https://www.linkedin.com/in/jagni-dasa-b06234b0/"),
+        url: 'https://www.linkedin.com/in/jagni-dasa-b06234b0/'),
     ContactTile(
         icon: SocialMediaIcons.github_circled,
-        name: "Github",
+        name: 'Github',
         color: Colors.black,
-        url: "https://www.github.com/jagni/"),
+        url: 'https://www.github.com/jagni/'),
     ContactTile(
         icon: Icons.mail,
-        name: "Email",
+        name: 'Email',
         color: Colors.red[700],
-        url: Uri(scheme: "mailto", path: "mailto:jagnidasa@gmail.com")
+        url: Uri(scheme: 'mailto', path: 'mailto:jagnidasa@gmail.com')
             .toString())
   ];
 

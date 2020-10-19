@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tinycolor/tinycolor.dart';
 
 class DoubleCard extends StatelessWidget {
-  final Function onTap;
+  final void Function() onTap;
   final double borderRadius;
   final double backgroundCardInset;
   final Color backgroundCardColor;
@@ -38,9 +38,7 @@ class DoubleCard extends StatelessWidget {
               shadowColor: backgroundCardColor != null
                   ? TinyColor(backgroundCardColor).lighten(10).color
                   : TinyColor(theme.primaryColor).lighten(10).color,
-              color: backgroundCardColor != null
-                  ? backgroundCardColor
-                  : theme.primaryColor)),
+              color: backgroundCardColor ?? theme.primaryColor)),
       Positioned.fill(
         top: backgroundCardBottom / 2,
         right: backgroundCardLeft / 2,
@@ -50,9 +48,7 @@ class DoubleCard extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius),
             ),
-            color: foregroundCardColor != null
-                ? foregroundCardColor
-                : theme.cardColor,
+            color: foregroundCardColor ?? theme.cardColor,
             child: Container(
                 child: InkWell(
               onTap: onTap,

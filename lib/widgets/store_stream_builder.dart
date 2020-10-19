@@ -58,12 +58,9 @@ class StoreStreamBuilderState<T> extends State<StoreStreamBuilder<T>> {
   }
 
   Widget callBuilder(AsyncSnapshot snapshot) {
-    if (widget.list) {
-      if (snapshot.hasData && snapshot.data.length > 0) {
-        return widget.builder(snapshot.data, context);
-      }
-    } else if (snapshot.hasData) {
-      return widget.builder(snapshot.data, context);
+    final data = snapshot.data;
+    if (snapshot.hasData && data is T) {
+      return widget.builder(data, context);
     }
     return null;
   }

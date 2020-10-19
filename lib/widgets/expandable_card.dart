@@ -63,7 +63,7 @@ class ExpandableContainerState extends State<ExpandableContainer>
     );
   }
 
-  didTapHeader() {
+  void didTapHeader() {
     setState(() {
       _expanded = !_expanded;
     });
@@ -74,7 +74,7 @@ class ExpandableContainerState extends State<ExpandableContainer>
     }
   }
 
-  didTapContent() {
+  void didTapContent() {
     setState(() {
       _expanded = !_expanded;
     });

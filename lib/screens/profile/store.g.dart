@@ -58,7 +58,7 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
       ActionController(name: 'ProfileStoreBase');
 
   @override
-  dynamic setupFirebaseListeners() {
+  void setupFirebaseListeners() {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
         name: 'ProfileStoreBase.setupFirebaseListeners');
     try {
@@ -69,7 +69,7 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   }
 
   @override
-  dynamic disposeFirebaseListeners() {
+  void disposeFirebaseListeners() {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
         name: 'ProfileStoreBase.disposeFirebaseListeners');
     try {
@@ -80,7 +80,7 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   }
 
   @override
-  dynamic setProfileStream(Stream<dynamic> stream) {
+  void setProfileStream(Stream<Profile> stream) {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
         name: 'ProfileStoreBase.setProfileStream');
     try {
@@ -91,7 +91,7 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   }
 
   @override
-  dynamic setExperienceStream(Stream<dynamic> stream) {
+  void setExperienceStream(Stream<List<Experience>> stream) {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
         name: 'ProfileStoreBase.setExperienceStream');
     try {
@@ -102,7 +102,7 @@ mixin _$ProfileStore on ProfileStoreBase, Store {
   }
 
   @override
-  dynamic setSkillsStream(Stream<dynamic> stream) {
+  void setSkillsStream(Stream<List<Skill>> stream) {
     final _$actionInfo = _$ProfileStoreBaseActionController.startAction(
         name: 'ProfileStoreBase.setSkillsStream');
     try {

@@ -28,7 +28,7 @@ mixin _$PortfolioStore on PortfolioStoreBase, Store {
       ActionController(name: 'PortfolioStoreBase');
 
   @override
-  dynamic setupFirebaseListeners() {
+  void setupFirebaseListeners() {
     final _$actionInfo = _$PortfolioStoreBaseActionController.startAction(
         name: 'PortfolioStoreBase.setupFirebaseListeners');
     try {
@@ -39,7 +39,7 @@ mixin _$PortfolioStore on PortfolioStoreBase, Store {
   }
 
   @override
-  dynamic disposeFirebaseListeners() {
+  void disposeFirebaseListeners() {
     final _$actionInfo = _$PortfolioStoreBaseActionController.startAction(
         name: 'PortfolioStoreBase.disposeFirebaseListeners');
     try {
@@ -50,7 +50,7 @@ mixin _$PortfolioStore on PortfolioStoreBase, Store {
   }
 
   @override
-  dynamic setStream(Stream<dynamic> stream) {
+  void setStream(Stream<List<Project>> stream) {
     final _$actionInfo = _$PortfolioStoreBaseActionController.startAction(
         name: 'PortfolioStoreBase.setStream');
     try {

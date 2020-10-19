@@ -35,7 +35,7 @@ class CachedImageWrapper extends StatelessWidget {
                       SizedBox(width: smallestMeasure / 3, child: ErrorImage()),
                       Flexible(
                         child: Text(
-                          "Ops! Houve um erro ao obter esta imagem",
+                          'Ops! Houve um erro ao obter esta imagem',
                           textAlign: TextAlign.center,
                           maxLines: 2,
                         ),

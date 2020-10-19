@@ -11,7 +11,7 @@ class ContactTile extends StatelessWidget {
   const ContactTile(
       {Key key,
       this.icon = Icons.contact_mail,
-      this.name = "",
+      this.name = '',
       this.color = Colors.transparent,
       this.url})
       : super(key: key);

@@ -37,7 +37,7 @@ class PortfolioDetailsPhotos extends StatelessWidget {
                           maxScale: 1.0,
                           errorBuilder: (context, error, stackTrace) {
                             return Image.asset(
-                              "assets/images/error.png",
+                              'assets/images/error.png',
                               fit: BoxFit.contain,
                             );
                           },
