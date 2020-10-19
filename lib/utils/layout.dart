@@ -6,7 +6,7 @@ class AppLayout {
   static double appBarSize = 64;
   static double paddingSize = 16;
   static double maxContentHeight(BuildContext context) =>
-      MediaQuery.of(context).size.height;
+      MediaQuery.of(context).size.height - kBottomNavigationBarHeight;
 
   static double maxContentWidth(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
