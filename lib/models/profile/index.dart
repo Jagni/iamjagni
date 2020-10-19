@@ -11,8 +11,11 @@ class Profile extends FirebaseEntity {
 
   @override
   int compareTo(other) {
-    return this.uid = other.uid;
+    if (other is Profile) {
+      return uid.compareTo(other.uid);
+    }
+    return -1;
   }
 
-  static final pluralName = "profile";
+  static final pluralName = 'profile';
 }

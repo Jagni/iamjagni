@@ -1,14 +1,12 @@
-import 'dart:collection';
-
-import "package:cloud_firestore/cloud_firestore.dart";
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class FirebaseEntity extends Comparable {
   ///Firestore's document ID
-  String uid = "";
+  String uid = '';
 
   ///Path to parent node, which contains this entity's collection.
   ///If null or empty, the collection will be created on the root firestore node: `/`
-  String parentPath = "";
+  String parentPath = '';
 
   ///This entity's collection name
   static String pluralName;
@@ -27,13 +25,13 @@ abstract class FirebaseEntity extends Comparable {
   ///Subclasses must override this constructor and
   ///obtain properties from the DocumentSnapshot like so:
   ///```
-  ///property1 = doc.data["property1"];
-  ///property2 = doc.data["property2"];
+  ///property1 = doc.data['property1'];
+  ///property2 = doc.data['property2'];
   ///...
   ///```
   FirebaseEntity.withDoc(DocumentSnapshot doc) {
     uid = doc.id;
-    final pathComponents = doc.reference.path.split("/");
+    final pathComponents = doc.reference.path.split('/');
     pathComponents.removeLast();
     pathComponents.removeLast();
     parentPath = '';
@@ -49,7 +47,7 @@ abstract class FirebaseEntity extends Comparable {
 
   String path() {
     if (uid.isNotEmpty) {
-      return collectionPath() + "/" + uid;
+      return collectionPath() + '/' + uid;
     }
     return null;
   }
@@ -58,12 +56,12 @@ abstract class FirebaseEntity extends Comparable {
   ///Subclasses must add new entries to the map like so:
   ///```
   ///final map = super.toMap();
-  ///map["property1"] = property1;
-  ///map["property2"] = property2;
+  ///map['property1'] = property1;
+  ///map['property2'] = property2;
   ///...
   ///return map;
   ///```
-  LinkedHashMap<String, dynamic> toMap() {
-    return LinkedHashMap<String, dynamic>();
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{};
   }
 }

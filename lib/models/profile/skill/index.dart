@@ -12,12 +12,9 @@ class Skill extends FirebaseEntity {
   @override
   int compareTo(other) {
     if (other is Skill) {
-      final priorityComparison =
-          this.data.priority.compareTo(other.data.priority);
+      final priorityComparison = data.priority.compareTo(other.data.priority);
       if (priorityComparison == 0) {
-        return this
-            .data
-            .title
+        return data.title
             .toLowerCase()
             .compareTo(other.data.title.toLowerCase());
       }
@@ -26,5 +23,5 @@ class Skill extends FirebaseEntity {
     return -1;
   }
 
-  static final pluralName = "skills";
+  static final pluralName = 'skills';
 }

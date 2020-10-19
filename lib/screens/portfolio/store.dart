@@ -12,7 +12,7 @@ abstract class PortfolioStoreBase with Store {
   @observable
   ObservableStream<List<Project>> projects;
   @action
-  setupFirebaseListeners() {
+  void setupFirebaseListeners() {
     disposeFirebaseListeners();
     _dao = FirebaseEntityDAO<Project>(
         Project.pluralName, (doc) => Project.withDoc(doc));
@@ -20,14 +20,14 @@ abstract class PortfolioStoreBase with Store {
   }
 
   @action
-  disposeFirebaseListeners() {
+  void disposeFirebaseListeners() {
     if (_dao != null) {
       _dao.dispose();
     }
   }
 
   @action
-  setStream(Stream stream) {
+  void setStream(Stream<List<Project>> stream) {
     disposeFirebaseListeners();
     projects = ObservableStream(stream);
   }

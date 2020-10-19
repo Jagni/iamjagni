@@ -10,7 +10,7 @@ class AppLayout {
 
   static double maxContentWidth(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    double limitSize = width * 0.9;
+    var limitSize = width * 0.9;
     if (screenIsLarge(context)) {
       limitSize = width * 0.8;
     }

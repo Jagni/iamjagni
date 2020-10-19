@@ -21,26 +21,26 @@ abstract class ProfileStoreBase with Store {
   ObservableStream<List<Experience>> experiences;
 
   @action
-  setupFirebaseListeners() {
+  void setupFirebaseListeners() {
     disposeFirebaseListeners();
 
     _profileDAO = SingleFirebaseEntityDAO<Profile>(
-        Profile.pluralName + "/default", (doc) => Profile.withDoc(doc));
+        Profile.pluralName + '/default', (doc) => Profile.withDoc(doc));
     profile = ObservableStream(_profileDAO.stream);
 
     _skillsDAO = FirebaseEntityDAO<Skill>(
-        Profile.pluralName + "/default/" + Skill.pluralName,
+        Profile.pluralName + '/default/' + Skill.pluralName,
         (doc) => Skill.withDoc(doc));
     skills = ObservableStream(_skillsDAO.stream);
 
     _experiencesDAO = FirebaseEntityDAO<Experience>(
-        Profile.pluralName + "/default/" + Experience.pluralName,
+        Profile.pluralName + '/default/' + Experience.pluralName,
         (doc) => Experience.withDoc(doc));
     experiences = ObservableStream(_experiencesDAO.stream);
   }
 
   @action
-  disposeFirebaseListeners() {
+  void disposeFirebaseListeners() {
     if (_profileDAO != null) {
       _profileDAO.dispose();
     }
@@ -53,19 +53,19 @@ abstract class ProfileStoreBase with Store {
   }
 
   @action
-  setProfileStream(Stream stream) {
+  void setProfileStream(Stream<Profile> stream) {
     disposeFirebaseListeners();
     profile = ObservableStream(stream);
   }
 
   @action
-  setExperienceStream(Stream stream) {
+  void setExperienceStream(Stream<List<Experience>> stream) {
     disposeFirebaseListeners();
     experiences = ObservableStream(stream);
   }
 
   @action
-  setSkillsStream(Stream stream) {
+  void setSkillsStream(Stream<List<Skill>> stream) {
     disposeFirebaseListeners();
     skills = ObservableStream(stream);
   }

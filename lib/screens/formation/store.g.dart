@@ -28,7 +28,7 @@ mixin _$FormationStore on FormationStoreBase, Store {
       ActionController(name: 'FormationStoreBase');
 
   @override
-  dynamic setupFirebaseListeners() {
+  void setupFirebaseListeners() {
     final _$actionInfo = _$FormationStoreBaseActionController.startAction(
         name: 'FormationStoreBase.setupFirebaseListeners');
     try {
@@ -39,7 +39,7 @@ mixin _$FormationStore on FormationStoreBase, Store {
   }
 
   @override
-  dynamic disposeFirebaseListeners() {
+  void disposeFirebaseListeners() {
     final _$actionInfo = _$FormationStoreBaseActionController.startAction(
         name: 'FormationStoreBase.disposeFirebaseListeners');
     try {
@@ -50,7 +50,7 @@ mixin _$FormationStore on FormationStoreBase, Store {
   }
 
   @override
-  dynamic setFormationStream(Stream<dynamic> stream) {
+  void setFormationStream(Stream<List<FormationEntry>> stream) {
     final _$actionInfo = _$FormationStoreBaseActionController.startAction(
         name: 'FormationStoreBase.setFormationStream');
     try {

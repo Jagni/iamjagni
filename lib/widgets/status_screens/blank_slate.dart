@@ -18,7 +18,7 @@ class BlankSlateScreen extends StatelessWidget {
           SizedBox(
             width: AppLayout.maxContentWidth(context) / 2.5,
             child: Text(
-              "Ops! Nada por aqui ainda...",
+              'Ops! Nada por aqui ainda...',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.caption,
             ),

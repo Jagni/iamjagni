@@ -9,6 +9,7 @@ class ExperienceTile extends StatelessWidget {
 
   const ExperienceTile({Key key, this.experience}) : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
@@ -26,7 +27,7 @@ class ExperienceTile extends StatelessWidget {
               child: Container(
                 width: 20,
                 height: 20,
-                decoration: new BoxDecoration(
+                decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(color: Colors.white, width: 3),
                     color: theme.primaryColor,
@@ -34,7 +35,7 @@ class ExperienceTile extends StatelessWidget {
                       BoxShadow(
                         color: Colors.black.withAlpha(50),
                         blurRadius: 1,
-                        offset: new Offset(0.0, 1.0),
+                        offset: Offset(0.0, 1.0),
                       ),
                     ]),
               ),

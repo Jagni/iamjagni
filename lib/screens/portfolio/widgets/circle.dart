@@ -43,24 +43,24 @@ class ProjectCircle extends HexGridChild {
   @override
   double getScaledSize(
       HexGridContext hexGridContext, double distanceFromOrigin) {
-    double scaledSize = hexGridContext.maxSize -
+    final scaledSize = hexGridContext.maxSize -
         (distanceFromOrigin * hexGridContext.scaleFactor);
     return max(scaledSize, hexGridContext.minSize);
   }
 
-  buildImage(Project project) {
+  Widget buildImage(Project project) {
     var url = project.data.iconUrl;
     final asset = url == null;
     if (asset) {
-      url = "assets/images/avatar.png";
+      url = 'assets/images/avatar.png';
     }
     return Hero(
         transitionOnUserGestures: true,
-        tag: project.uid + "icon",
+        tag: project.uid + 'icon',
         child: CircleImage(url: url, asset: asset));
   }
 
-  buildTitle(Project project, BuildContext context) {
+  Widget buildTitle(Project project, BuildContext context) {
     final child = Text(
       project.data.title,
       style: Theme.of(context).textTheme.headline5,
@@ -69,7 +69,7 @@ class ProjectCircle extends HexGridChild {
     );
     return Hero(
         transitionOnUserGestures: true,
-        tag: project.uid + "title",
+        tag: project.uid + 'title',
         child: child);
   }
 }

@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
 class ProfileScreen extends StatelessWidget {
+  @override
   Widget build(BuildContext context) {
     return StoreStreamBuilder<Profile>(
         list: false,
@@ -19,7 +20,7 @@ class ProfileScreen extends StatelessWidget {
         });
   }
 
-  buildScreen(Profile profile, BuildContext context) {
+  Widget buildScreen(Profile profile, BuildContext context) {
     final theme = Theme.of(context);
 
     return Provider.value(
@@ -97,7 +98,7 @@ class ProfileScreen extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              "• Mobile Developer •",
+                              '• Mobile Developer •',
                               style: theme.textTheme.headline6
                                   .apply(color: theme.cardColor),
                             ),

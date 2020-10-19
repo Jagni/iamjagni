@@ -20,14 +20,14 @@ class ProfileContent extends StatelessWidget {
           ),
           SizedBox(height: AppLayout.paddingSize),
           Text(
-            "Contato",
+            'Contato',
             style: theme.textTheme.headline5,
           ),
           SizedBox(height: 4),
           SizedBox(height: 100, child: ProfileContactList()),
           SizedBox(height: AppLayout.paddingSize),
           Text(
-            "Habilidades",
+            'Habilidades',
             style: theme.textTheme.headline5,
           ),
           SizedBox(
@@ -40,7 +40,7 @@ class ProfileContent extends StatelessWidget {
           ),
           SizedBox(height: AppLayout.paddingSize),
           Text(
-            "Experiência",
+            'Experiência',
             style: theme.textTheme.headline5,
           ),
           SizedBox(height: 8),
