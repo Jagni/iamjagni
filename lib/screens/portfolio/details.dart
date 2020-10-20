@@ -112,31 +112,31 @@ class PortfolioDetails extends StatelessWidget {
             childAspectRatio: 1,
             mainAxisSpacing: AppLayout.paddingSize),
         itemBuilder: (BuildContext context, int index) {
-          return Hero(
-              tag: project.uid + index.toString(),
-              child: Card(
-                  color: Theme.of(context).scaffoldBackgroundColor,
-                  clipBehavior: Clip.antiAlias,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(16)),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              fullscreenDialog: true,
-                              builder: (BuildContext context) {
-                                return PortfolioDetailsPhotos(
-                                  initialIndex: index,
-                                  project: project,
-                                );
-                              }));
-                    },
+          return Card(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              clipBehavior: Clip.antiAlias,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16)),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (BuildContext context) {
+                            return PortfolioDetailsPhotos(
+                              project: project,
+                              initialIndex: index,
+                            );
+                          }));
+                },
+                child: Hero(
+                    tag: project.uid + index.toString(),
                     child: CachedImageWrapper(
                       url: project.data.screenshots[index],
                       fit: BoxFit.contain,
-                    ),
-                  )));
+                    )),
+              ));
         },
       ),
     );

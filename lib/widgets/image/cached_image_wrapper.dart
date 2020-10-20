@@ -23,8 +23,14 @@ class CachedImageWrapper extends StatelessWidget {
           fit: fit,
           imageUrl: url,
           alignment: alignment,
-          placeholder: (context, url) =>
-              Container(child: Center(child: CircularProgressIndicator())),
+          fadeInDuration: Duration(milliseconds: 250),
+          placeholderFadeInDuration: Duration(milliseconds: 250),
+          fadeOutDuration: Duration(milliseconds: 100),
+          placeholder: (context, url) => Center(
+              child: SizedBox(
+                  width: smallestMeasure / 2,
+                  height: smallestMeasure / 2,
+                  child: LoadingImage())),
           errorWidget: (context, url, error) => Container(
                 color: Theme.of(context).accentColor,
                 child: Padding(

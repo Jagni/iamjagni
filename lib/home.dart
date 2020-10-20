@@ -96,6 +96,7 @@ class _HomePageState extends State<HomePage>
         body: SafeArea(
           child: TabBarView(
             controller: _controller,
+            physics: NeverScrollableScrollPhysics(),
             children: widgetOptions,
           ),
         ),

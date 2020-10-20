@@ -30,7 +30,7 @@ class App extends StatelessWidget {
         // Show something whilst waiting for initialization to complete
         Widget shownWidget = Scaffold(body: LoadingScreen());
         MainStore store;
-        List<NavigatorObserver> observers = [];
+        var observers = <NavigatorObserver>[];
         FirebaseAnalytics analytics;
         // Otherwise show application
         if (snapshot.connectionState == ConnectionState.done) {

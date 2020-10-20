@@ -1,7 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/models/portfolio/project/index.dart';
+import 'package:iamjagni/utils/layout.dart';
+import 'package:iamjagni/widgets/image/status.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 class PortfolioDetailsPhotos extends StatelessWidget {
   final int initialIndex;
@@ -12,41 +15,34 @@ class PortfolioDetailsPhotos extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final backgroundColor = Theme.of(context).scaffoldBackgroundColor;
+
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           backgroundColor: Theme.of(context).primaryColor,
         ),
         backgroundColor: backgroundColor,
-        body: Column(
-          children: [
-            Expanded(
-              child: PageView.builder(
-                controller: PageController(
-                  initialPage: initialIndex,
-                ),
-                itemCount: project.data.screenshots.length,
-                itemBuilder: (context, position) {
-                  return Container(
-                      child: PhotoView(
-                          backgroundDecoration:
-                              BoxDecoration(color: backgroundColor),
-                          heroAttributes: PhotoViewHeroAttributes(
-                              tag: project.uid + position.toString()),
-                          tightMode: true,
-                          maxScale: 1.0,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Image.asset(
-                              'assets/images/error.png',
-                              fit: BoxFit.contain,
-                            );
-                          },
-                          imageProvider: CachedNetworkImageProvider(
-                              project.data.screenshots[position])));
-                },
-              ),
-            ),
-          ],
-        ));
+        body: PhotoViewGallery.builder(
+            itemCount: project.data.screenshots.length,
+            builder: (BuildContext context, int index) {
+              return PhotoViewGalleryPageOptions(
+                  imageProvider: CachedNetworkImageProvider(
+                      project.data.screenshots[index],
+                      imageRenderMethodForWeb: ImageRenderMethodForWeb.HttpGet),
+                  tightMode: true,
+                  initialScale: PhotoViewComputedScale.contained * 0.8,
+                  minScale: PhotoViewComputedScale.contained * 0.8,
+                  heroAttributes: PhotoViewHeroAttributes(
+                      tag: project.uid + index.toString()));
+            },
+            loadingBuilder: (context, event) {
+              return Center(
+                child: SizedBox(
+                    width: AppLayout.maxContentWidth(context) / 3,
+                    child: LoadingImage()),
+              );
+            },
+            backgroundDecoration: BoxDecoration(color: backgroundColor),
+            pageController: PageController(initialPage: initialIndex)));
   }
 }
