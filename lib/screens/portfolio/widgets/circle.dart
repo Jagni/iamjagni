@@ -65,7 +65,6 @@ class ProjectCircle extends HexGridChild {
       project.data.title,
       style: Theme.of(context).textTheme.headline5,
       textAlign: TextAlign.center,
-      maxLines: 1,
     );
     return Hero(
         transitionOnUserGestures: true,

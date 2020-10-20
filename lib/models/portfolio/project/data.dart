@@ -8,6 +8,7 @@ part 'data.g.dart';
 class ProjectData {
   final String title;
   final String iconUrl;
+  final double priority;
 
   final List<String> screenshots;
   final List<ProjectURL> urls;
@@ -22,7 +23,7 @@ class ProjectData {
   final DateTime date;
 
   ProjectData(this.title, this.iconUrl, this.screenshots, this.description,
-      this.urls, this.tech, this.date);
+      this.urls, this.tech, this.date, this.priority);
   factory ProjectData.fromJson(Map<String, dynamic> json) =>
       _$ProjectDataFromJson(json);
   Map<String, dynamic> toJson() => _$ProjectDataToJson(this);

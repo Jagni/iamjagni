@@ -29,7 +29,6 @@ class SkillTile extends StatelessWidget {
                 Flexible(
                     child: Text(
                   skill.data.title,
-                  maxLines: 1,
                   textAlign: TextAlign.center,
                 )),
               ],
