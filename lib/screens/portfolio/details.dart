@@ -88,8 +88,8 @@ class PortfolioDetails extends StatelessWidget {
   }
 
   Widget buildTitle(Project project, BuildContext context) {
-    final child = Text(project.data.title,
-        style: Theme.of(context).textTheme.headline5, maxLines: 1);
+    final child =
+        Text(project.data.title, style: Theme.of(context).textTheme.headline5);
     return Hero(
         transitionOnUserGestures: true,
         tag: project.uid + 'title',

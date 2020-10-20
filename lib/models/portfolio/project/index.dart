@@ -12,7 +12,13 @@ class Project extends FirebaseEntity {
   @override
   int compareTo(other) {
     if (other is Project) {
-      return data.title.toLowerCase().compareTo(other.data.title.toLowerCase());
+      final priorityComparison = data.priority.compareTo(other.data.priority);
+      if (priorityComparison == 0) {
+        return data.title
+            .toLowerCase()
+            .compareTo(other.data.title.toLowerCase());
+      }
+      return -priorityComparison;
     }
     return -1;
   }
