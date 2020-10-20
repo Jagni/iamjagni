@@ -25,8 +25,7 @@ class ProfileScreen extends StatelessWidget {
 
     return Provider.value(
       value: profile,
-      child: Scaffold(
-          body: SlidingSheet(
+      child: SlidingSheet(
         maxWidth: sheetWith(context),
         parallaxSpec: ParallaxSpec(enabled: true),
         elevation: 0,
@@ -49,12 +48,15 @@ class ProfileScreen extends StatelessWidget {
         // The body widget will be displayed under the SlidingSheet
         // and a parallax effect can be applied to it.
         body: Align(
-          child: SizedBox(
-              height: imageHeight(context),
-              child: CachedImageWrapper(
-                  url: profile.data.photo,
-                  fit: BoxFit.contain,
-                  alignment: Alignment.topCenter)),
+          child: Padding(
+            padding: EdgeInsets.only(top: AppLayout.paddingSize),
+            child: SizedBox(
+                height: imageHeight(context),
+                child: CachedImageWrapper(
+                    url: profile.data.photo,
+                    fit: BoxFit.contain,
+                    alignment: Alignment.topCenter)),
+          ),
           alignment: Alignment.topCenter,
         ),
         headerBuilder: (context, state) {
@@ -130,7 +132,7 @@ class ProfileScreen extends StatelessWidget {
                           horizontal: AppLayout.paddingSize * 2 + 4),
                       child: ProfileContent())));
         },
-      )),
+      ),
     );
   }
 

@@ -28,8 +28,7 @@ class PortfolioScreen extends StatelessWidget {
     final containerSize = min(
         AppLayout.maxContentWidth(context) - AppLayout.paddingSize * 2,
         AppLayout.maxContentHeight(context) - AppLayout.paddingSize * 2);
-    return Scaffold(
-        body: Column(children: [
+    return Column(children: [
       Expanded(
           child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -65,6 +64,6 @@ class PortfolioScreen extends StatelessWidget {
           ),
         ),
       ))
-    ]));
+    ]);
   }
 }

@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 class ExpandableContainer extends StatefulWidget {
   final Widget header;
   final Widget content;
-  ExpandableContainer({this.header, this.content});
+  final void Function() onExpanded;
+  ExpandableContainer({this.header, this.content, this.onExpanded});
 
   @override
   State<StatefulWidget> createState() => ExpandableContainerState();
@@ -68,6 +69,7 @@ class ExpandableContainerState extends State<ExpandableContainer>
       _expanded = !_expanded;
     });
     if (_expanded) {
+      widget.onExpanded();
       _animationController.forward();
     } else {
       _animationController.reverse();
@@ -79,6 +81,7 @@ class ExpandableContainerState extends State<ExpandableContainer>
       _expanded = !_expanded;
     });
     if (_expanded) {
+      widget.onExpanded();
       _animationController.forward();
     } else {
       _animationController.reverse();
