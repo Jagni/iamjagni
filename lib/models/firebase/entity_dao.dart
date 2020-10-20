@@ -9,7 +9,8 @@ class FirebaseEntityDAO<T extends FirebaseEntity> {
   Stream<List<DocumentSnapshot>> _docStream;
   StreamSubscription _docSubscription;
 
-  final StreamController<List<T>> _streamController = BehaviorSubject();
+  final StreamController<List<T>> _streamController =
+      BehaviorSubject<List<T>>();
 
   FirebaseEntityDAO(
       String collectionPath, T Function(DocumentSnapshot doc) entityConstructor,
@@ -40,7 +41,7 @@ class SingleFirebaseEntityDAO<T extends FirebaseEntity> {
   Stream<DocumentSnapshot> _docStream;
   StreamSubscription _docSubscription;
 
-  final StreamController<T> _streamController = StreamController<T>();
+  final StreamController<T> _streamController = BehaviorSubject<T>();
 
   SingleFirebaseEntityDAO(
       String documentPath, T Function(DocumentSnapshot doc) entityConstructor,

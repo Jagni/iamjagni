@@ -28,8 +28,8 @@ class StoreStreamBuilderState<T> extends State<StoreStreamBuilder<T>> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    store = Provider.of<MainStore>(context, listen: false);
-    stream = widget.selectedStream(store);
+    store ??= Provider.of<MainStore>(context, listen: false);
+    stream ??= widget.selectedStream(store);
   }
 
   @override

@@ -1,3 +1,4 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/models/portfolio/project/index.dart';
@@ -152,6 +153,11 @@ class PortfolioDetails extends StatelessWidget {
                 text: project.data.urls[index].label,
                 recognizer: TapGestureRecognizer()
                   ..onTap = () {
+                    final analytics =
+                        Provider.of<FirebaseAnalytics>(context, listen: false);
+                    analytics.logEvent(
+                        name: 'opened_url',
+                        parameters: {'value': project.data.urls[index].url});
                     launch(project.data.urls[index].url);
                   },
                 style: TextStyle(

@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hexagonal_grid/hexagonal_grid.dart';
@@ -8,6 +9,7 @@ import 'package:hexagonal_grid_widget/hex_grid_context.dart';
 import 'package:iamjagni/models/portfolio/project/index.dart';
 import 'package:iamjagni/screens/portfolio/details.dart';
 import 'package:iamjagni/widgets/image/circle_image.dart';
+import 'package:provider/provider.dart';
 
 class ProjectCircle extends HexGridChild {
   final Project project;
@@ -28,6 +30,11 @@ class ProjectCircle extends HexGridChild {
                   borderRadius: BorderRadius.circular(size)),
               child: InkWell(
                   onTap: () {
+                    final analytics =
+                        Provider.of<FirebaseAnalytics>(context, listen: false);
+                    analytics.logEvent(
+                        name: 'tapped_project',
+                        parameters: {'name': project.data.title});
                     Navigator.push(context,
                         CupertinoPageRoute(builder: (context) {
                       return PortfolioDetails(project: project);

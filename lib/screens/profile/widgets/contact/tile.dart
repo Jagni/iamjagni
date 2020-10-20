@@ -1,5 +1,7 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/utils/layout.dart';
+import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ContactTile extends StatelessWidget {
@@ -34,6 +36,10 @@ class ContactTile extends StatelessWidget {
                           BorderRadius.circular(AppLayout.paddingSize)),
                   child: InkWell(
                     onTap: () {
+                      final analytics = Provider.of<FirebaseAnalytics>(context,
+                          listen: false);
+                      analytics.logEvent(
+                          name: 'opened_url', parameters: {'value': url});
                       launch(url);
                     },
                     child: Icon(

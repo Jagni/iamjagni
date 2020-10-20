@@ -1,8 +1,10 @@
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/models/profile/experience/index.dart';
 import 'package:iamjagni/utils/layout.dart';
 import 'package:iamjagni/widgets/expandable_card.dart';
 import 'package:iamjagni/widgets/image/cached_image_wrapper.dart';
+import 'package:provider/provider.dart';
 
 class ExperienceTile extends StatelessWidget {
   final Experience experience;
@@ -46,37 +48,44 @@ class ExperienceTile extends StatelessWidget {
                   bottom: AppLayout.paddingSize,
                   top: AppLayout.paddingSize),
               child: ExpandableContainer(
-                header: Row(children: [
-                  SizedBox(width: AppLayout.paddingSize / 2),
-                  SizedBox(
-                      width: 40,
-                      height: 40,
-                      child: CachedImageWrapper(
-                          url: experience.data.icon, fit: BoxFit.contain)),
-                  SizedBox(width: AppLayout.paddingSize / 2),
-                  Expanded(
-                      child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(experience.data.title, style: textTheme.headline6),
-                      SizedBox(height: 3),
-                      Text(experience.data.institution,
-                          style: textTheme.subtitle1
-                              .apply(color: textTheme.bodyText1.color)),
-                      SizedBox(height: 3),
-                      Text(experience.data.dateString, style: textTheme.caption)
-                    ],
-                  )),
-                ]),
-                content: Padding(
-                  padding: EdgeInsets.only(
-                      top: 8.0,
-                      left: 40 + AppLayout.paddingSize,
-                      right: AppLayout.paddingSize),
-                  child: Text(experience.data.description),
-                ),
-              ),
+                  header: Row(children: [
+                    SizedBox(width: AppLayout.paddingSize / 2),
+                    SizedBox(
+                        width: 40,
+                        height: 40,
+                        child: CachedImageWrapper(
+                            url: experience.data.icon, fit: BoxFit.contain)),
+                    SizedBox(width: AppLayout.paddingSize / 2),
+                    Expanded(
+                        child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(experience.data.title, style: textTheme.headline6),
+                        SizedBox(height: 3),
+                        Text(experience.data.institution,
+                            style: textTheme.subtitle1
+                                .apply(color: textTheme.bodyText1.color)),
+                        SizedBox(height: 3),
+                        Text(experience.data.dateString,
+                            style: textTheme.caption)
+                      ],
+                    )),
+                  ]),
+                  content: Padding(
+                    padding: EdgeInsets.only(
+                        top: 8.0,
+                        left: 40 + AppLayout.paddingSize,
+                        right: AppLayout.paddingSize),
+                    child: Text(experience.data.description),
+                  ),
+                  onExpanded: () {
+                    final analytics =
+                        Provider.of<FirebaseAnalytics>(context, listen: false);
+                    analytics.logEvent(
+                        name: 'opened_experience',
+                        parameters: {'value': experience.data.title});
+                  }),
             )
           ],
         ),
