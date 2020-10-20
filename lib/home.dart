@@ -130,6 +130,8 @@ class _HomePageState extends State<HomePage>
 
   void _sendCurrentTabToAnalytics() {
     final name = tabs[selectedIndex].text;
-    observer.analytics.logEvent(name: 'tapped_tab', parameters: {'name': name});
+    observer.analytics.setCurrentScreen(
+      screenName: '${HomePage.routeName}/tab-$name',
+    );
   }
 }
