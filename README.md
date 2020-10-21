@@ -1,16 +1,10 @@
-# iamjagni
+# iAm: Jagni
 
-A new Flutter project.
+Olá! Sou um mestrando em Ciências da Computação no IFCE capacitado a desenvolver apps em linguagens nativas e frameworks híbridos. Este é um meta-portfólio-currículo feito em Flutter para expor minhas experiências e servir como uma demonstração das minhas habilidades.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<p float="left">
+<img src="https://github.com/Jagni/iamjagni/blob/screenshots/ios/fastlane/screenshots/pt-BR/iPhone%20Xs%20Max-profile.png?raw=true" height="400">
+<img src="https://github.com/Jagni/iamjagni/blob/screenshots/ios/fastlane/screenshots/pt-BR/iPhone%20Xs%20Max-portfolio.png?raw=true" height="400">
+<img src="https://github.com/Jagni/iamjagni/blob/screenshots/ios/fastlane/screenshots/pt-BR/iPhone%20Xs%20Max-project.png?raw=true" height="400">
+<img src="https://github.com/Jagni/iamjagni/blob/screenshots/ios/fastlane/screenshots/pt-BR/iPhone%20Xs%20Max-formation.png?raw=true" height="400">
+</p
