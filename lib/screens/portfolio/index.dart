@@ -28,6 +28,11 @@ class PortfolioScreen extends StatelessWidget {
     final containerSize = min(
         AppLayout.maxContentWidth(context) - AppLayout.paddingSize * 2,
         AppLayout.maxContentHeight(context) - AppLayout.paddingSize * 2);
+    final circleList = projects
+        .asMap()
+        .map((index, project) => MapEntry(index, ProjectCircle(project, index)))
+        .values
+        .toList();
     return Column(children: [
       Expanded(
           child: Padding(
@@ -49,9 +54,7 @@ class PortfolioScreen extends StatelessWidget {
                       BorderRadius.all(Radius.circular(containerSize / 2)),
                 ),
                 child: HexGridWidget(
-                    children: projects
-                        .map((project) => ProjectCircle(project))
-                        .toList(),
+                    children: circleList,
                     hexGridContext: HexGridContext(
                         _minHexWidgetSize,
                         containerSize / 3,

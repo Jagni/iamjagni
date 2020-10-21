@@ -21,9 +21,9 @@ class FormationEntry extends FirebaseEntity {
         } else {
           dateComparison = -1;
         }
-        return data.title.compareTo(other.data.title);
+        return dateComparison;
       }
-      return dateComparison;
+      return data.title.toLowerCase().compareTo(other.data.title.toLowerCase());
     }
     return -1;
   }

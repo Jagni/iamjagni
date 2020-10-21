@@ -2,6 +2,16 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Sua localização é utilizada para aprimorar sua experiência com traduções e customizações</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Sua localização é utilizada para aprimorar sua experiência com traduções e customizações</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Sua localização é utilizada para aprimorar sua experiência com traduções e customizações</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Sua localização é utilizada para aprimorar sua experiência com traduções e customizações</string>
+	<key>NSFileProviderDomainUsageDescription</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -21,7 +31,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>$(FLUTTER_BUILD_NUMBER)</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -43,5 +53,8 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIStatusBarHidden</key>
+	<true/>
+
 </dict>
 </plist>
