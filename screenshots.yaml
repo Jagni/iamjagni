@@ -15,9 +15,10 @@ devices:
   ios:
     iPhone Xs Max:
     iPhone 8 Plus:
-    iPad Pro (12.9-inch) (4th generation):
+    iPad Pro (12.9-inch) (3rd generation):
   android:
-    Nexus_6P_API_29:
+    Nexus_6P:
+      frame: false
 
 # Frame screenshots
-frame: false
+frame: true

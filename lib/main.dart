@@ -74,6 +74,7 @@ class AppState extends State<App> {
           Provider.value(value: analytics)
         ],
         child: MaterialApp(
+            debugShowCheckedModeBanner: false,
             theme: brightAppThemeData,
             darkTheme: darkAppThemeData,
             navigatorObservers: [observer],
