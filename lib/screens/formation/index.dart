@@ -29,7 +29,7 @@ class FormationScreenState extends State<FormationScreen> {
         padding: EdgeInsets.only(bottom: AppLayout.paddingSize),
         child: Column(children: [
           Flexible(
-            flex: 1,
+            flex: 3,
             child: Container(
                 child: Align(
                     alignment: Alignment.bottomCenter,
@@ -39,7 +39,7 @@ class FormationScreenState extends State<FormationScreen> {
                     ))),
           ),
           Flexible(
-            flex: 3,
+            flex: 8,
             child: Stack(
               children: [
                 Positioned(
@@ -62,6 +62,9 @@ class FormationScreenState extends State<FormationScreen> {
               ],
             ),
           ),
+          Flexible(
+            child: Container(),
+          )
         ]),
       ),
     );

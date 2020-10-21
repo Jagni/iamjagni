@@ -6,19 +6,22 @@ import 'package:flutter/material.dart';
 import 'package:hexagonal_grid/hexagonal_grid.dart';
 import 'package:hexagonal_grid_widget/hex_grid_child.dart';
 import 'package:hexagonal_grid_widget/hex_grid_context.dart';
+import 'package:iamjagni/keys.dart';
 import 'package:iamjagni/models/portfolio/project/index.dart';
-import 'package:iamjagni/screens/portfolio/details.dart';
+import 'package:iamjagni/screens/portfolio/details/index.dart';
 import 'package:iamjagni/widgets/image/circle_image.dart';
 import 'package:provider/provider.dart';
 
 class ProjectCircle extends HexGridChild {
+  final int index;
   final Project project;
-  ProjectCircle(this.project);
+  ProjectCircle(this.project, this.index);
 
   @override
   Widget toHexWidget(BuildContext context, HexGridContext hexGridContext,
       double size, UIHex hex) {
     return Container(
+      key: ValueKey(AppKeys.projectCirclePrefix + index.toString()),
       padding: EdgeInsets.all((hexGridContext.maxSize - size) / 2),
       child: Container(
           width: size,

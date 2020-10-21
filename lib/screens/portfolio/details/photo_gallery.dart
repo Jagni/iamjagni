@@ -6,10 +6,10 @@ import 'package:iamjagni/widgets/image/status.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:photo_view/photo_view_gallery.dart';
 
-class PortfolioDetailsPhotos extends StatelessWidget {
+class ProjectPhotoGallery extends StatelessWidget {
   final int initialIndex;
   final Project project;
-  const PortfolioDetailsPhotos({Key key, this.initialIndex, this.project})
+  const ProjectPhotoGallery({Key key, this.initialIndex, this.project})
       : super(key: key);
 
   @override

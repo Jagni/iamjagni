@@ -21,7 +21,8 @@ final brightAppThemeData = ThemeData(
   textTheme: TextTheme()
       .apply(bodyColor: brightAccentColor, displayColor: brightAccentColor),
   typography: Typography.material2018(),
-  appBarTheme: AppBarTheme(color: Colors.blueGrey[900]),
+  appBarTheme:
+      AppBarTheme(color: brightCardColor, brightness: Brightness.light),
   accentColor: brightAccentColor,
   cardColor: brightCardColor,
   scaffoldBackgroundColor: brightScaffoldBackgroundColor,
@@ -37,7 +38,7 @@ final brightAppThemeData = ThemeData(
 final darkAppThemeData = ThemeData(
   primaryColor: darkPrimaryColor,
   dividerColor: darkAccentColor,
-  appBarTheme: AppBarTheme(color: Colors.blueGrey[900]),
+  appBarTheme: AppBarTheme(color: darkCardColor, brightness: Brightness.dark),
   primarySwatch: darkPrimaryColor,
   cardColor: darkCardColor,
   scaffoldBackgroundColor: darkScaffoldBackgroundColor,

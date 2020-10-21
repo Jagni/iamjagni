@@ -1,10 +1,12 @@
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/home.dart';
 import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/design.dart';
+import 'package:iamjagni/widgets/status_screens/error.dart';
 import 'package:iamjagni/widgets/status_screens/loading.dart';
 import 'package:provider/provider.dart';
 
@@ -13,46 +15,84 @@ void main() {
   runApp(App());
 }
 
-class App extends StatelessWidget {
-  // Create the initilization Future outside of `build`:
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
+class App extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => AppState();
+}
+
+class AppState extends State<App> {
+  final Future<FirebaseApp> _appInitialization = Firebase.initializeApp();
+  Future<UserCredential> _authInitialization;
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      // Initialize FlutterFire:
-      future: _initialization,
-      builder: (context, snapshot) {
-        // Check for errors
-        // if (snapshot.hasError) {
-        //   return SomethingWentWrong();
-        // }
+    return appInitializationScreen();
+  }
 
-        // Show something whilst waiting for initialization to complete
-        Widget shownWidget = Scaffold(body: LoadingScreen());
-        MainStore store;
-        var observers = <NavigatorObserver>[];
-        FirebaseAnalytics analytics;
-        // Otherwise show application
-        if (snapshot.connectionState == ConnectionState.done) {
-          analytics = FirebaseAnalytics();
-          final observer = FirebaseAnalyticsObserver(analytics: analytics);
-          shownWidget = HomePage(observer);
-          observers.add(observer);
-          store = MainStore();
-          store.setupFirebaseListeners();
+  Widget appInitializationScreen() {
+    return FutureBuilder(
+      future: _appInitialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return buildErrorScreen();
         }
 
-        return MultiProvider(
-            providers: [
-              Provider.value(value: store),
-              Provider.value(value: analytics)
-            ],
-            child: MaterialApp(
-                theme: brightAppThemeData,
-                darkTheme: darkAppThemeData,
-                navigatorObservers: observers,
-                home: shownWidget));
+        if (snapshot.connectionState == ConnectionState.done) {
+          _authInitialization ??= FirebaseAuth.instance.signInAnonymously();
+          return signInInitializationScreen();
+        }
+
+        return buildLoadingScreen();
       },
     );
+  }
+
+  Widget signInInitializationScreen() {
+    return FutureBuilder(
+      future: _authInitialization,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return buildErrorScreen();
+        }
+
+        if (snapshot.connectionState == ConnectionState.done) {
+          return buildHome();
+        }
+
+        return buildLoadingScreen();
+      },
+    );
+  }
+
+  Widget buildHome() {
+    final analytics = FirebaseAnalytics();
+    final observer = FirebaseAnalyticsObserver(analytics: analytics);
+    final store = MainStore();
+    store.setupFirebaseListeners();
+    return MultiProvider(
+        providers: [
+          Provider.value(value: store),
+          Provider.value(value: analytics)
+        ],
+        child: MaterialApp(
+            theme: brightAppThemeData,
+            darkTheme: darkAppThemeData,
+            navigatorObservers: [observer],
+            home: HomePage(observer)));
+  }
+
+  Widget buildLoadingScreen() {
+    return MaterialApp(
+        theme: brightAppThemeData,
+        darkTheme: darkAppThemeData,
+        home: Scaffold(body: LoadingScreen()));
+  }
+
+  Widget buildErrorScreen() {
+    return MaterialApp(
+        theme: brightAppThemeData,
+        darkTheme: darkAppThemeData,
+        home: Scaffold(
+            body: ErrorScreen(
+                message: 'Ops! Verifique sua conexão com a internet...')));
   }
 }

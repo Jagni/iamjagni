@@ -4,6 +4,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/observer.dart';
+import 'package:iamjagni/keys.dart';
 import 'package:iamjagni/screens/formation/index.dart';
 import 'package:iamjagni/screens/portfolio/index.dart';
 import 'package:iamjagni/screens/profile/index.dart';
@@ -83,12 +84,15 @@ class _HomePageState extends State<HomePage>
                 height: 40,
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: Colors.blueGrey,
+                    color: Theme.of(context).primaryColor,
                     image: DecorationImage(
                         image: AssetImage('assets/images/avatar.png'))),
               ),
               SizedBox(width: 4),
-              Text('iAm: Jagni'),
+              Text(
+                'iAm: Jagni',
+                style: Theme.of(context).textTheme.headline6,
+              ),
             ],
           ),
           centerTitle: false,
@@ -108,11 +112,15 @@ class _HomePageState extends State<HomePage>
           }),
           showUnselectedLabels: false,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Perfil'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.folder_special), label: 'Portfólio'),
+                icon: Icon(Icons.person, key: ValueKey(AppKeys.profileTab)),
+                label: 'Perfil'),
             BottomNavigationBarItem(
-              icon: Icon(Icons.school),
+                icon: Icon(Icons.folder_special,
+                    key: ValueKey(AppKeys.portfolioTab)),
+                label: 'Portfólio'),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.school, key: ValueKey(AppKeys.formationTab)),
               label: 'Formação',
             )
           ],

@@ -2,7 +2,7 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:iamjagni/models/portfolio/project/index.dart';
-import 'package:iamjagni/screens/portfolio/details_photos.dart';
+import 'package:iamjagni/screens/portfolio/details/photo_gallery.dart';
 import 'package:iamjagni/store.dart';
 import 'package:iamjagni/utils/layout.dart';
 import 'package:iamjagni/widgets/image/circle_image.dart';
@@ -11,7 +11,6 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PortfolioDetails extends StatelessWidget {
-  static const routeName = 'PortfolioDetails';
   final Project project;
   const PortfolioDetails({Key key, this.project}) : super(key: key);
   @override
@@ -124,7 +123,7 @@ class PortfolioDetails extends StatelessWidget {
                       MaterialPageRoute(
                           fullscreenDialog: true,
                           builder: (BuildContext context) {
-                            return PortfolioDetailsPhotos(
+                            return ProjectPhotoGallery(
                               project: project,
                               initialIndex: index,
                             );
