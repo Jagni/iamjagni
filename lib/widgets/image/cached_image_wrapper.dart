@@ -32,7 +32,7 @@ class CachedImageWrapper extends StatelessWidget {
                   height: smallestMeasure / 2,
                   child: LoadingImage())),
           errorWidget: (context, url, error) => Container(
-                color: Theme.of(context).accentColor,
+                color: Colors.transparent,
                 child: Padding(
                   padding: EdgeInsets.all(AppLayout.paddingSize),
                   child: Column(
