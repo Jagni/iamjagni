@@ -74,6 +74,7 @@ class AppState extends State<App> {
           Provider.value(value: analytics)
         ],
         child: MaterialApp(
+            title: 'iAm: Jagni',
             debugShowCheckedModeBanner: false,
             theme: brightAppThemeData,
             darkTheme: darkAppThemeData,
@@ -83,6 +84,7 @@ class AppState extends State<App> {
 
   Widget buildLoadingScreen() {
     return MaterialApp(
+        title: 'iAm: Jagni',
         theme: brightAppThemeData,
         darkTheme: darkAppThemeData,
         home: Scaffold(body: LoadingScreen()));
@@ -90,6 +92,7 @@ class AppState extends State<App> {
 
   Widget buildErrorScreen() {
     return MaterialApp(
+        title: 'iAm: Jagni',
         theme: brightAppThemeData,
         darkTheme: darkAppThemeData,
         home: Scaffold(

@@ -10,13 +10,17 @@ class ErrorScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
+      mainAxisSize: MainAxisSize.min,
       children: [
         SizedBox(
             width: AppLayout.maxContentWidth(context) / 3, child: ErrorImage()),
         if (message != null)
           SizedBox(
               width: AppLayout.maxContentWidth(context) / 1.5,
-              child: Text(message))
+              child: Text(
+                message,
+                textAlign: TextAlign.center,
+              ))
       ],
     ));
   }
