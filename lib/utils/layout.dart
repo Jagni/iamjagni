@@ -12,7 +12,7 @@ class AppLayout {
     final width = MediaQuery.of(context).size.width;
     var limitSize = width * 0.9;
     if (screenIsLarge(context)) {
-      limitSize = width * 0.8;
+      limitSize = width * 0.4;
     }
     return min(min(width - paddingSize * 2, limitSize), 800);
   }

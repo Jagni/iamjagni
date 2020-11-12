@@ -26,7 +26,7 @@ class ProfileScreen extends StatelessWidget {
     return Provider.value(
       value: profile,
       child: SlidingSheet(
-        maxWidth: sheetWith(context),
+        maxWidth: AppLayout.maxContentWidth(context),
         parallaxSpec: ParallaxSpec(enabled: true),
         elevation: 0,
         color: Colors.transparent,
@@ -82,7 +82,8 @@ class ProfileScreen extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
-                    width: sheetWith(context) - AppLayout.paddingSize * 4,
+                    width: AppLayout.maxContentWidth(context) -
+                        AppLayout.paddingSize * 4,
                     child: Card(
                       elevation: 6,
                       margin: EdgeInsets.all(0),
@@ -138,13 +139,5 @@ class ProfileScreen extends StatelessWidget {
 
   double imageHeight(BuildContext context) {
     return AppLayout.maxContentHeight(context);
-  }
-
-  double sheetWith(BuildContext context) {
-    final maxWidth = AppLayout.maxContentWidth(context);
-    if (AppLayout.screenIsLarge(context)) {
-      return maxWidth * 0.75;
-    }
-    return maxWidth;
   }
 }
